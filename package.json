@@ -1,0 +1,11 @@
+{
+  "name": "camp",
+  "version": "1.0.0",
+  "description": "Camping Planner",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Isaac Schiffler",
+  "license": "ISC"
+}
