@@ -1,0 +1,16 @@
+:root {
+    --color-background-page: rgb(253, 255, 253);
+    --color-background-header: rgb(204, 240, 204);
+
+    --width-scroll-image: 400px;
+
+    --radius-small: 5px;
+    --radius-med: 10px;
+    --radius-large: 15px;
+
+    --border-small: 1px;
+    --border-med: 1.5px;
+    --border-large: 2px;
+
+    --font-size-important: 40px;
+}
