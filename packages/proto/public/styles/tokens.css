@@ -1,6 +1,8 @@
 :root {
     --color-background-page: rgb(253, 255, 253);
-    --color-background-header: rgb(204, 240, 204);
+    --color-background-header: rgb(233, 255, 233);
+    --color-accent: green;
+    --color-dark-accent: rgb(21, 81, 21);
 
     --width-scroll-image: 400px;
 
