@@ -2,7 +2,7 @@
   "name": "proto",
   "version": "1.0.0",
   "description": "Prototype",
-  "main": "index.html",
+  "main": "public/index.html",
   "scripts": {
     "start": "http-server",
     "test": "echo \"Error: no test specified\" && exit 1"
