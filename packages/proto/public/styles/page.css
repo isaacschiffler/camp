@@ -1,12 +1,17 @@
 body {
     background-color: var(--color-background-page);
     color: rgb(7, 7, 7);
+    font-family: var(--font-family-body);
 }
 
 header {
     background-color: var(--color-background-header);
     display: flex;
     justify-content: space-between;
+}
+header a {
+    display: flex;
+    align-items: center;
 }
 
 h1 {
@@ -16,6 +21,11 @@ h1 {
 
 h2 {
     text-align: center;
+    color: var(--color-accent);
+}
+
+h1, h2, h3, h4, h5, a {
+    font-family: var(--font-family-display);
 }
 
 a {
@@ -37,7 +47,8 @@ li {
 }
 
 img {
-    width: var(--width-scroll-image);
+    max-width: var(--width-scroll-image);
+    max-height: var(--width-scroll-image);
 }
 
 button {
@@ -45,17 +56,19 @@ button {
     padding: 5px;
     padding-left: 20px;
     padding-right: 20px;
-    background-color: transparent;
+    background-color: var(--color-background-button);
     cursor: pointer;
     font-weight: bold;
 }
 
 input {
-    background-color: transparent;
+    background-color: var(--color-background-input);
+    padding: 3px;
     padding-left: 5px;
     margin-left: 10px;
     border-width: 1px;
     border-radius: var(--radius-small);
+    text-transform: uppercase;
 }
 
 .total-cost {
@@ -63,4 +76,42 @@ input {
     border: var(--border-small) solid red;
     border-radius: var(--radius-small);
     width: max-content;
+}
+
+.icon {
+    display: inline;
+    height: 1.5rem;
+    width: 1.5rem;
+    vertical-align: top;
+    fill: currentColor;
+}
+
+.remove {
+    cursor: pointer;
+    fill: red;
+}
+
+.page-icons {
+    display: inline;
+    height: 3rem;
+    width: 3rem;
+    vertical-align: top;
+    fill: currentColor;
+}
+
+header.image {
+    background-size: cover;
+    background-position: center;
+    height: var(--height-scroll-image);
+    width: calc(var(--width-scroll-image) + 100px);
+}
+
+h1.image {
+    background-color: rgb(255 255 255 /50%);
+    height: max-content;
+    margin: 0;
+}
+
+input {
+    border-color: green;
 }
