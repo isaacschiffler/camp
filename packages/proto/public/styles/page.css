@@ -24,7 +24,7 @@ h2 {
     color: var(--color-accent);
 }
 
-h1, h2, h3, h4, h5, a {
+h1, h2, h3, h4, h5, a, button, input, select {
     font-family: var(--font-family-display);
 }
 
@@ -71,11 +71,16 @@ input {
     text-transform: uppercase;
 }
 
+select {
+    text-transform: uppercase;
+}
+
 .total-cost {
-    font-size: var(--font-size-importan);
+    font-size: var(--font-size-important);
     border: var(--border-small) solid red;
     border-radius: var(--radius-small);
     width: max-content;
+    padding: 5px;
 }
 
 .icon {
@@ -114,4 +119,10 @@ h1.image {
 
 input {
     border-color: green;
+}
+
+.get-started {
+    font-size: var(--size-type-l);
+    justify-content: center;
+    background-color: var(--color-background-button);
 }

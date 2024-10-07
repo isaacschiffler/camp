@@ -1,7 +1,7 @@
 :root {
     --color-background-page: rgb(253, 255, 253);
     --color-background-header: rgb(233, 255, 233);
-    --color-background-button: transparent;
+    --color-background-button: rgb(233, 255, 233);
     --color-background-input: white;
     --color-accent: green;
     --color-dark-accent: rgb(21, 81, 21);
