@@ -6,8 +6,8 @@
     --color-accent: green;
     --color-dark-accent: rgb(21, 81, 21);
 
-    --width-scroll-image: 400px;
-    --height-scroll-image: 300px;
+    --width-scroll-image: 100%;
+    --height-scroll-image: 70vw;
 
     /* --font-family-body: Calibri, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif; */
     --font-family-display: Tahoma, Verdana, Segoe, sans-serif;

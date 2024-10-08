@@ -8,15 +8,31 @@ header {
     background-color: var(--color-background-header);
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    height: 4em;
+    padding-left: .5em;
+    padding-right: .5em;
 }
 header a {
     display: flex;
     align-items: center;
 }
+header a:hover {
+    text-decoration: none;
+}
+header.nav {
+    background-color: var(--color-background-page);
+    height: 3em;
+}
 
 h1 {
     text-align: center;
-    width: max-content;
+    width: fit-content;
+    margin-left: .5em;
+}
+h1.logo {
+    font-size: var(--size-type-xxl);
+    margin-left: 0;
 }
 
 h2 {
@@ -109,6 +125,11 @@ header.image {
     background-position: center;
     height: var(--height-scroll-image);
     width: calc(var(--width-scroll-image) + 100px);
+    align-items: normal;
+    justify-content: center;
+    width: var(--width-scroll-image);
+    max-width: 600px;
+    max-height: 450px;
 }
 
 h1.image {
