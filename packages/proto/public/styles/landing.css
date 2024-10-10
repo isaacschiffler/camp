@@ -1,0 +1,77 @@
+.landing {
+  display: grid;
+  grid-template-columns: [start] 1fr 1fr 1fr 1fr [end];
+  gap: 5px;
+}
+
+.landing > header {
+  grid-column: start / end;
+}
+
+.landing > header.gs-image {
+  grid-column: start / 4;
+}
+
+.landing > h2 {
+  text-align: start;
+  margin-left: 10px;
+}
+
+h2.itin {
+  grid-column: 4 / end;
+}
+
+section.nav-bar {
+  grid-column: start / 4;
+  margin-top: var(--margin-m);
+}
+
+ul.nav {
+  display: flex;
+  justify-content: space-around;
+  list-style-type: none;
+  padding: 0;
+}
+li {
+  margin: 0;
+}
+
+ul.itin {
+  list-style-type: none;
+  padding-top: var(--margin-m);
+  padding-bottom: var(--margin-m);
+  padding-left: var(--margin-s);
+}
+ul.itin > li > a {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.gs-image {
+  background-size: cover;
+  background-position: center;
+  width: 100%;
+  height: 37.5vw;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.get-started {
+  font-size: var(--size-type-large);
+  justify-content: center;
+  background-color: var(--color-background-button);
+  border-radius: var(--radius-med);
+}
+
+.gs-link {
+  height: fit-content;
+  width: fit-content;
+}
+
+p {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+}

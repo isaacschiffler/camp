@@ -1,149 +1,151 @@
 body {
-    background-color: var(--color-background-page);
-    color: rgb(7, 7, 7);
-    font-family: var(--font-family-body);
+  background-color: var(--color-background-page);
+  color: rgb(7, 7, 7);
+  font-family: var(--font-family-body);
 }
 
 header {
-    background-color: var(--color-background-header);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    height: 4em;
-    padding-left: .5em;
-    padding-right: .5em;
+  background-color: var(--color-background-header);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 4em;
+  padding-left: var(--header-offset);
+  padding-right: var(--header-offset);
 }
 header a {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 header a:hover {
-    text-decoration: none;
+  text-decoration: none;
 }
 header.nav {
-    background-color: var(--color-background-page);
-    height: 3em;
+  background-color: var(--color-background-page);
+  height: 3em;
 }
 
 h1 {
-    text-align: center;
-    width: fit-content;
-    margin-left: .5em;
+  text-align: center;
+  width: fit-content;
+  margin-left: var(--header-offset);
 }
 h1.logo {
-    font-size: var(--size-type-xxl);
-    margin-left: 0;
+  font-size: var(--size-type-xxl);
+  margin-left: 0;
 }
 
 h2 {
-    text-align: center;
-    color: var(--color-accent);
+  text-align: center;
+  color: var(--color-accent);
 }
 
-h1, h2, h3, h4, h5, a, button, input, select {
-    font-family: var(--font-family-display);
+h1,
+h2,
+h3,
+h4,
+h5,
+a,
+button,
+input,
+select {
+  font-family: var(--font-family-display);
 }
 
 a {
-    color: currentColor;
-    text-decoration: none;
+  color: currentColor;
+  text-decoration: none;
 }
 a:hover {
-    text-decoration: underline;
+  text-decoration: underline;
 }
 
 dt {
-    color: var(--color-accent);
-    font-size: 20px;
-    padding: 10px;
+  color: var(--color-accent);
+  font-size: 20px;
+  padding: 10px;
 }
 
 li {
-    margin-top: 10px;
+  margin-top: 10px;
 }
 
 img {
-    max-width: var(--width-scroll-image);
-    max-height: var(--width-scroll-image);
+  max-width: var(--width-scroll-image);
+  max-height: var(--width-scroll-image);
 }
 
 button {
-    border-radius: var(--radius-small);
-    padding: 5px;
-    padding-left: 20px;
-    padding-right: 20px;
-    background-color: var(--color-background-button);
-    cursor: pointer;
-    font-weight: bold;
+  border-radius: var(--radius-small);
+  padding: 5px;
+  padding-left: 20px;
+  padding-right: 20px;
+  background-color: var(--color-background-button);
+  cursor: pointer;
+  font-weight: bold;
 }
 
 input {
-    background-color: var(--color-background-input);
-    padding: 3px;
-    padding-left: 5px;
-    margin-left: 10px;
-    border-width: 1px;
-    border-radius: var(--radius-small);
-    text-transform: uppercase;
+  background-color: var(--color-background-input);
+  padding: 3px;
+  padding-left: 5px;
+  margin-left: 10px;
+  border-width: 1px;
+  border-radius: var(--radius-small);
+  text-transform: uppercase;
 }
 
 select {
-    text-transform: uppercase;
+  text-transform: uppercase;
 }
 
 .total-cost {
-    font-size: var(--font-size-important);
-    border: var(--border-small) solid red;
-    border-radius: var(--radius-small);
-    width: max-content;
-    padding: 5px;
+  font-size: var(--font-size-important);
+  border: var(--border-small) solid red;
+  border-radius: var(--radius-small);
+  width: max-content;
+  padding: 5px;
 }
 
 .icon {
-    display: inline;
-    height: 1.5rem;
-    width: 1.5rem;
-    vertical-align: top;
-    fill: currentColor;
+  display: inline;
+  height: 1.5rem;
+  width: 1.5rem;
+  vertical-align: top;
+  fill: currentColor;
 }
 
 .remove {
-    cursor: pointer;
-    fill: red;
+  cursor: pointer;
+  fill: red;
 }
 
 .page-icons {
-    display: inline;
-    height: 3rem;
-    width: 3rem;
-    vertical-align: top;
-    fill: currentColor;
+  display: inline;
+  height: 3rem;
+  width: 3rem;
+  vertical-align: top;
+  fill: currentColor;
 }
 
 header.image {
-    background-size: cover;
-    background-position: center;
-    height: var(--height-scroll-image);
-    width: calc(var(--width-scroll-image) + 100px);
-    align-items: normal;
-    justify-content: center;
-    width: var(--width-scroll-image);
-    max-width: 600px;
-    max-height: 450px;
+  background-size: cover;
+  background-position: center;
+  height: var(--height-scroll-image);
+  width: calc(var(--width-scroll-image) + 100px);
+  align-items: normal;
+  justify-content: center;
+  width: var(--width-scroll-image);
+  max-width: 600px;
+  max-height: 450px;
 }
 
 h1.image {
-    background-color: rgb(255 255 255 /50%);
-    height: max-content;
-    margin: 0;
+  background-color: rgb(255 255 255 /50%);
+  height: max-content;
+  margin: 0;
 }
 
 input {
-    border-color: green;
-}
-
-.get-started {
-    font-size: var(--size-type-l);
-    justify-content: center;
-    background-color: var(--color-background-button);
+  border-color: green;
 }
