@@ -1,0 +1,43 @@
+.four-sections {
+  display: grid;
+  grid-template-columns: [start] repeat(4, 1fr) [end];
+  gap: 5px;
+  padding-left: var(--margin-m);
+}
+
+.thr-sections > header {
+  grid-column: start / end;
+}
+
+h1 {
+  font-size: var(--size-type-xl);
+  padding-bottom: var(--margin-m);
+}
+
+h2 {
+  padding: var(--margin-m);
+  text-align: left;
+}
+
+ul {
+  list-style-type: none;
+}
+
+p {
+  margin-top: var(--margin-s);
+}
+
+.images {
+  display: grid;
+  grid-template-columns: [start] repeat(7, 1fr) [end];
+  margin-top: var(--margin-m);
+  align-items: center;
+}
+
+.outer-img {
+  grid-column: span 2;
+}
+
+.middle-img {
+  grid-column: span 3;
+}

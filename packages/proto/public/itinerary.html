@@ -1,54 +1,72 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <link rel="stylesheet" href="/styles/page.css"/>
-        <link rel="stylesheet" href="/styles/tokens.css"/>
-        <link rel="stylesheet" href="/styles/reset.css"/>    
-    </head>
-    <body>
-        <a href="index.html">
-                <img class="icon" src="/icons/back.svg"/>
-            </a>
-        <h1>
-            Trip 1
-        </h1>
-        <dl>
-            <dt>
-                Group:
-            </dt>
-            <dd>
-                Isaac Schiffler
-            </dd>
-            <dd>
-                Charlie Swanson
-            </dd>
-            <dd>
-                Jack Olson
-            </dd>
-            <dd>
-                Paxton Rech
-            </dd>
-            <dt>
-                Location:
-            </dt>
-            <dd>
-                Yellowstone National Park
-            </dd>
-            <dd>
-                Campsite OY2
-            </dd>
-            <dt>
-                Cost
-            </dt>
-            <dd>
-                $1525
-            </dd>
-            <dt>
-                Gear still needed:
-            </dt>
-            <dd>
-                5 items
-            </dd>
-        </dl>
-    </body>
+  <head>
+    <link rel="stylesheet" href="/styles/page.css" />
+    <link rel="stylesheet" href="/styles/tokens.css" />
+    <link rel="stylesheet" href="/styles/reset.css" />
+    <link rel="stylesheet" href="/styles/itinerary.css" />
+  </head>
+  <body>
+    <header>
+      <a href="index.html">
+        <h1 class="logo">Backpack</h1>
+      </a>
+      <a href="profile.html">
+        <img class="page-icons" src="/icons/account.svg" />
+      </a>
+    </header>
+    <header class="nav">
+      <a href="index.html">
+        <img class="icon" src="/icons/back.svg" />
+        <img class="icon" src="/icons/home.svg" />
+      </a>
+    </header>
+    <h1>Trip to Yellowstone</h1>
+    <section class="four-sections">
+      <section>
+        <h2>Group:</h2>
+        <ul>
+          <li>Isaac Schiffler</li>
+          <li>Charlie Swanson</li>
+          <li>Jack Olson</li>
+          <li>Connor Behrens</li>
+        </ul>
+      </section>
+      <section>
+        <h2>Location:</h2>
+        <ul>
+          <li>Yellowstone National Park</li>
+          <li>Campsite OY2</li>
+        </ul>
+      </section>
+      <section>
+        <h2>Activities:</h2>
+        <ul>
+          <li>Fly Fishing</li>
+          <li>Hiking</li>
+          <li>Hunting</li>
+        </ul>
+      </section>
+      <section>
+        <h2>Gear:</h2>
+        <input type="checkbox" id="group1" name="group1" value="group" />
+        <label for="group1">Medical supplies</label><br />
+        <input type="checkbox" id="group2" name="group2" value="group" />
+        <label for="group2">Tent</label><br />
+        <input type="checkbox" id="group3" name="group3" value="group" />
+        <label for="group3">Pots and pans</label><br />
+        <input type="checkbox" id="group4" name="group4" value="group" />
+        <label for="group4">Bug spray</label><br />
+        <input type="checkbox" id="group5" name="group5" value="group" />
+        <label for="group5">Bear spray</label><br />
+        <input type="checkbox" id="group6" name="group6" value="group" />
+        <label for="group6">Bear rope</label><br />
+      </section>
+    </section>
+    <section class="images">
+      <img class="outer-img" src="/images/2Y1.jpeg" />
+      <img class="middle-img" src="/images/fishing.jpeg" />
+      <img class="outer-img" src="/images/fishing3.jpeg" />
+    </section>
+  </body>
 </html>

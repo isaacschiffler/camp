@@ -8,16 +8,16 @@
   grid-column: start / end;
 }
 
-.landing > header.gs-image {
-  grid-column: start / 4;
-}
-
 .landing > h2 {
   text-align: start;
   margin-left: 10px;
 }
 
-h2.itin {
+.landing > section.plan {
+  grid-column: start / 4;
+}
+
+.itin {
   grid-column: 4 / end;
 }
 
@@ -56,6 +56,7 @@ ul.itin > li > a {
   align-items: center;
   justify-content: center;
   position: relative;
+  margin-top: var(--margin-m);
 }
 
 .get-started {

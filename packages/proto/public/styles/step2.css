@@ -1,0 +1,47 @@
+.thr-sections {
+  display: grid;
+  grid-template-columns: [start] repeat(7, 1fr) [end];
+  gap: 5px;
+}
+
+.thr-sections > header {
+  grid-column: start / end;
+}
+
+.activity {
+  grid-column: start / 4;
+}
+
+header.act-head {
+  background-image: none;
+  height: fit-content;
+  padding-right: var(--margin-m);
+}
+
+.gear {
+  grid-column: 4 / 6;
+}
+
+dl {
+  margin-bottom: var(--margin-l);
+  margin-top: var(--margin-m);
+  margin-left: var(--margin-s);
+}
+
+dd {
+  margin-top: var(--margin-s);
+}
+
+.food {
+  grid-column: 6 / 8;
+}
+
+h2 {
+  margin-top: var(--margin-l);
+  margin-bottom: var(--margin-m);
+  font-size: var(--size-type-ml);
+}
+
+input {
+  margin-top: var(--margin-s);
+}
