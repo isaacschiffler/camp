@@ -119,13 +119,7 @@ select {
   display: inline;
   height: 1.5rem;
   width: 1.5rem;
-  vertical-align: top;
   fill: currentColor;
-}
-
-.remove {
-  cursor: pointer;
-  fill: red;
 }
 
 .page-icons {
@@ -160,10 +154,6 @@ input {
 
 label {
   padding-left: var(--margin-s);
-}
-
-input {
-  margin-top: var(--margin-s);
 }
 
 dt {

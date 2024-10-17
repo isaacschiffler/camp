@@ -59,3 +59,14 @@
 .group > ol {
   margin-top: var(--margin-m);
 }
+
+.group > ol > li {
+  /* align-items: baseline; */
+  /* display: flex;
+  align-items: center; */
+}
+
+.remove {
+  cursor: pointer;
+  fill: rgb(255, 0, 0);
+}

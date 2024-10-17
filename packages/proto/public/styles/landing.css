@@ -13,6 +13,11 @@
   margin-left: 10px;
 }
 
+.itin > h2 {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
 .landing > section.plan {
   grid-column: start / 4;
 }
