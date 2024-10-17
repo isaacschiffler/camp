@@ -150,6 +150,7 @@ h1.image {
 
 input {
   border-color: green;
+  margin-top: var(--margin-s);
 }
 
 label {
