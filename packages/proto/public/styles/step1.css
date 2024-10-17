@@ -60,13 +60,14 @@
   margin-top: var(--margin-m);
 }
 
-.group > ol > li {
+.input-cont {
   /* align-items: baseline; */
-  /* display: flex;
-  align-items: center; */
+  display: flex;
+  align-items: center;
 }
 
 .remove {
   cursor: pointer;
   fill: rgb(255, 0, 0);
+  margin-left: var(--margin-s);
 }
