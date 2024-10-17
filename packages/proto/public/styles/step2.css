@@ -41,7 +41,3 @@ h2 {
   margin-bottom: var(--margin-m);
   font-size: var(--size-type-ml);
 }
-
-input {
-  margin-top: var(--margin-s);
-}
