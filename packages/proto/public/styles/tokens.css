@@ -1,10 +1,14 @@
 :root {
   --color-background-page: rgb(253, 255, 253);
-  --color-background-header: rgb(233, 255, 233);
+  --color-background-bottom-header: rgb(233, 255, 233);
+  --color-background-top-header: rgb(195, 253, 195);
   --color-background-button: rgba(233, 255, 233, 0.637);
   --color-background-input: white;
   --color-accent: green;
   --color-dark-accent: rgb(21, 81, 21);
+  --color-main-font: black;
+
+  --icon-fill: black;
 
   --width-scroll-image: 100%;
   --height-scroll-image: 70vw;

@@ -5,6 +5,22 @@
     <link rel="stylesheet" href="/styles/tokens.css" />
     <link rel="stylesheet" href="/styles/reset.css" />
     <link rel="stylesheet" href="/styles/step1.css" />
+
+    <script type="importmap">
+      {
+        "imports": {
+          "@calpoly/mustang": "https://unpkg.com/@calpoly/mustang"
+        }
+      }
+    </script>
+    <script type="module">
+      import { define } from "@calpoly/mustang";
+      import { CampSiteElement } from "./scripts/camp-site.js";
+
+      define({
+        "camp-site": CampSiteElement,
+      });
+    </script>
   </head>
   <body class="thr-sections">
     <header>
@@ -55,7 +71,22 @@
       </dl>
     </section>
     <section id="campsite" class="campsite">
-      <header class="image" style="background-image: url('/images/2Y1.jpeg')">
+      <camp-site image_url="./images/2Y1.jpeg">
+        <span slot="name">Campsite 2Y1: Agate Creek</span>
+        <ul slot="features">
+          <li>Yellowstone River</li>
+          <li>Canyon</li>
+          <li>Evergreen Forest</li>
+          <li>Trout Fishing</li>
+        </ul>
+        <ul slot="amenities">
+          <li>Bear Pole</li>
+          <li>No Bathroom</li>
+          <li>Fire Ring</li>
+          <li>No Fire Grate</li>
+        </ul>
+      </camp-site>
+      <!-- <header class="image" style="background-image: url('/images/2Y1.jpeg')">
         <h1>Campsite 2Y1: Agate Creek</h1>
       </header>
       <section class="cs-info">
@@ -77,7 +108,7 @@
             <li>No Fire Grate</li>
           </ul>
         </div>
-      </section>
+      </section> -->
     </section>
     <section id="group" class="group">
       <h1>Group members</h1>

@@ -1,14 +1,23 @@
 body {
   background-color: var(--color-background-page);
-  color: rgb(7, 7, 7);
+  color: var(--color-main-font);
   font-family: var(--font-family-body);
+}
+
+body.darkmode {
+  --color-background-page: rgb(0, 28, 0);
+  --color-background-bottom-header: rgb(41, 98, 41);
+  --color-background-top-header: rgb(0, 44, 0);
+  --icon-fill: white;
+  --color-accent: rgb(213, 255, 213);
+  --color-main-font: rgb(248, 255, 248);
 }
 
 header {
   background-image: linear-gradient(
     to bottom,
-    rgb(195, 253, 195) 0%,
-    var(--color-background-header) 80%,
+    var(--color-background-top-header) 0%,
+    var(--color-background-bottom-header) 80%,
     transparent 100%
   );
   display: flex;
@@ -17,6 +26,7 @@ header {
   height: 4.5em;
   padding-left: var(--header-offset);
   padding-right: var(--header-offset);
+  color: var(--color-main-font);
 }
 header a {
   display: flex;
@@ -72,6 +82,10 @@ dt {
   color: var(--color-accent);
   font-size: var(--size-type-ml);
   padding: 10px;
+}
+
+ul {
+  list-style-type: none;
 }
 
 li {

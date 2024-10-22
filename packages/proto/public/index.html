@@ -5,12 +5,27 @@
     <link rel="stylesheet" href="/styles/tokens.css" />
     <link rel="stylesheet" href="/styles/reset.css" />
     <link rel="stylesheet" href="/styles/landing.css" />
+    <script type="module">
+      // dark mode toggle handling
+      const darkModeToggle = document.getElementById("darkmode-toggle");
+      darkModeToggle.addEventListener("change", function () {
+        if (this.checked) {
+          document.body.classList.add("darkmode"); // Add the darkmode class to the body
+        } else {
+          document.body.classList.remove("darkmode"); // Remove the darkmode class
+        }
+      });
+    </script>
   </head>
   <body class="landing">
     <header>
       <a href="index.html">
         <h1 class="logo">Backpack</h1>
       </a>
+      <label>
+        <input id="darkmode-toggle" type="checkbox" autocomplete="off" />
+        Dark mode
+      </label>
       <a href="profile.html">
         <svg class="page-icons">
           <use href="/icons/sprite.svg#account" />

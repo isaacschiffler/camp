@@ -27,7 +27,6 @@ h1 {
 .trip-img {
   background-size: cover;
   background-position: center;
-  /* height: var(--height-scroll-image); */
   height: 27.5vw;
   width: 100%;
   align-items: normal;
