@@ -27,6 +27,15 @@ p {
   margin-top: var(--margin-s);
 }
 
+.gear-section {
+  display: flex;
+  flex-direction: column;
+}
+
+input {
+  margin-right: var(--margin-s);
+}
+
 .images {
   display: grid;
   grid-template-columns: [start] repeat(7, 1fr) [end];

@@ -6,10 +6,10 @@ body {
 
 body.darkmode {
   --color-background-page: rgb(0, 28, 0);
-  --color-background-bottom-header: rgb(41, 98, 41);
-  --color-background-top-header: rgb(0, 44, 0);
+  --color-background-bottom-header: rgb(0, 50, 0);
+  --color-background-top-header: rgb(51, 117, 51);
   --icon-fill: white;
-  --color-accent: rgb(213, 255, 213);
+  --color-accent: rgb(218, 255, 218);
   --color-main-font: rgb(248, 255, 248);
 }
 
@@ -177,5 +177,5 @@ dt {
 }
 dd {
   margin-left: var(--margin-l);
-  margin-top: var(--margin-xs);
+  margin-bottom: var(--margin-xs);
 }
