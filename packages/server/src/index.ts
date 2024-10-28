@@ -3,6 +3,7 @@ import { Trip } from "models";
 import { ItineraryPage } from "./pages/itinerary";
 import { getTrip } from "./services/itinerary-svc";
 import { connect } from "./services/mongo";
+import Trips from "./services/itinerary-svc";
 
 connect("backpack"); // use your own db name here
 
@@ -18,10 +19,19 @@ app.get("/hello", (req: Request, res: Response) => {
 
 app.get("/itinerary/:tripId", (req: Request, res: Response) => {
   const { tripId } = req.params;
-  const data: Trip = getTrip(tripId);
-  const page = new ItineraryPage(data);
+  //   const data: Trip = getTrip(tripId);
+  //   const page = new ItineraryPage(data);
+  Trips.get(tripId)
+    .then((data) => {
+      res
+        .set("Content-Type", "text/html")
+        .send(new ItineraryPage(data).render());
+    })
+    .catch((err) => {
+      res.status(404).send("Trip not found: " + err);
+    });
 
-  res.set("Content-Type", "text/html").send(page.render());
+  //   res.set("Content-Type", "text/html").send(page.render());
 });
 
 app.listen(port, () => {

@@ -1,5 +1,5 @@
 import { Trip, User, Location } from "../models";
-import { Schema, model } from "mongoose";
+import { Schema, model, ObjectId } from "mongoose";
 
 const TripSchema = new Schema<Trip>(
   {
@@ -22,7 +22,7 @@ function index(): Promise<Trip[]> {
 }
 
 function get(tripId: string): Promise<Trip> {
-  return TripModel.find({ tripId })
+  return TripModel.find({ tripId: tripId })
     .then((list) => list[0])
     .catch((err) => {
       throw `${err} Trip Not Found`;

@@ -23,8 +23,8 @@ var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__ge
 ));
 var import_express = __toESM(require("express"));
 var import_itinerary = require("./pages/itinerary");
-var import_itinerary_svc = require("./services/itinerary-svc");
 var import_mongo = require("./services/mongo");
+var import_itinerary_svc2 = __toESM(require("./services/itinerary-svc"));
 (0, import_mongo.connect)("backpack");
 const app = (0, import_express.default)();
 const port = process.env.PORT || 3e3;
@@ -35,9 +35,11 @@ app.get("/hello", (req, res) => {
 });
 app.get("/itinerary/:tripId", (req, res) => {
   const { tripId } = req.params;
-  const data = (0, import_itinerary_svc.getTrip)(tripId);
-  const page = new import_itinerary.ItineraryPage(data);
-  res.set("Content-Type", "text/html").send(page.render());
+  import_itinerary_svc2.default.get(tripId).then((data) => {
+    res.set("Content-Type", "text/html").send(new import_itinerary.ItineraryPage(data).render());
+  }).catch((err) => {
+    res.status(404).send("Trip not found: " + err);
+  });
 });
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);

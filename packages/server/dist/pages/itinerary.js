@@ -38,6 +38,24 @@ class ItineraryPage {
   constructor(data) {
     this.data = data;
   }
+  formatDate(date) {
+    const options = {
+      month: "long",
+      day: "numeric"
+    };
+    const dateFormat = new Intl.DateTimeFormat("en-US", options).format(date);
+    return this.formatOrdinalDate(dateFormat);
+  }
+  formatOrdinalDate(dateString) {
+    const [month, day] = dateString.split(" ");
+    const dayNumber = parseInt(day, 10);
+    let suffix;
+    if (dayNumber === 1 || dayNumber === 21 || dayNumber === 31) suffix = "st";
+    else if (dayNumber === 2 || dayNumber === 22) suffix = "nd";
+    else if (dayNumber === 3 || dayNumber === 23) suffix = "rd";
+    else suffix = "th";
+    return `${month} ${dayNumber}${suffix}`;
+  }
   render() {
     return (0, import_renderPage.default)({
       body: this.renderBody(),
@@ -46,6 +64,8 @@ class ItineraryPage {
   }
   renderBody() {
     const host = process.env.HOST || "";
+    const startDate = this.formatDate(this.data.startDate);
+    const endDate = this.formatDate(this.data.endDate);
     const memberList = import_server.html`
       <ul>
         ${this.data.members.map((mem) => import_server.html`<li>${mem.name}</li>`)}
@@ -97,6 +117,7 @@ class ItineraryPage {
         </a>
       </header>
       <h1>${this.data.title}</h1>
+      <h5>${startDate} - ${endDate}</h5>
       <section class="four-sections">
         <section>
           <h2>Group:</h2>

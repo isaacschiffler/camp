@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose, { ConnectionStates } from "mongoose";
 import dotenv from "dotenv";
 
 mongoose.set("debug", true);
