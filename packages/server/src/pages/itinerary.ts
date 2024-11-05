@@ -53,43 +53,43 @@ export class ItineraryPage {
 
   renderBody() {
     const host = process.env.HOST || "";
-    const startDate = this.formatDate(this.data.startDate);
-    const endDate = this.formatDate(this.data.endDate);
+    // const startDate = this.formatDate(this.data.startDate);
+    // const endDate = this.formatDate(this.data.endDate);
 
-    const memberList = html`
-      <ul>
-        ${this.data.members.map((mem) => html`<li>${mem.name}</li>`)}
-      </ul>
-    `;
+    // const memberList = html`
+    //   <ul>
+    //     ${this.data.members.map((mem) => html`<li>${mem.name}</li>`)}
+    //   </ul>
+    // `;
 
-    const campsiteList = this.data.location.campsite.map(
-      (site) => html`<li>${site}</li>`
-    );
+    // const campsiteList = this.data.location.campsite.map(
+    //   (site) => html`<li>${site}</li>`
+    // );
 
-    let activityList = html`
-      <ul>
-        <li>No Activities Planned Yet</li>
-      </ul>
-    `;
-    if (this.data.activities) {
-      activityList = html`
-        <ul>
-          ${this.data.activities.map((act) => html`<li>${act}</li>`)}
-        </ul>
-      `;
-    }
+    // let activityList = html`
+    //   <ul>
+    //     <li>No Activities Planned Yet</li>
+    //   </ul>
+    // `;
+    // if (this.data.activities) {
+    //   activityList = html`
+    //     <ul>
+    //       ${this.data.activities.map((act) => html`<li>${act}</li>`)}
+    //     </ul>
+    //   `;
+    // }
 
-    const gearList = html`
-      ${this.data.gear.map(
-        (item) =>
-          html` <label key=${item}>
-            <input type="checkbox" autocomplete="off" />
-            ${item}
-          </label>`
-      )}
-    `;
+    // const gearList = html`
+    //   ${this.data.gear.map(
+    //     (item) =>
+    //       html` <label key=${item}>
+    //         <input type="checkbox" autocomplete="off" />
+    //         ${item}
+    //       </label>`
+    //   )}
+    // `;
 
-    const imageList = this.data.image_urls;
+    // const imageList = this.data.image_urls;
 
     const tripId = "671ff484e9de70a53a387f67";
 
@@ -115,34 +115,6 @@ export class ItineraryPage {
         </a>
       </header>
       <itinerary-element src="/api/itineraries/${tripId}"></itinerary-element>
-      <h1>${this.data.title}</h1>
-      <h5>${startDate} - ${endDate}</h5>
-      <section class="four-sections">
-        <section>
-          <h2>Group:</h2>
-          ${memberList}
-        </section>
-        <section>
-          <h2>Location:</h2>
-          <ul>
-            <li>${this.data.location.region}</li>
-            ${campsiteList}
-          </ul>
-        </section>
-        <section>
-          <h2>Activities:</h2>
-          ${activityList}
-        </section>
-        <section class="gear-section">
-          <h2>Gear:</h2>
-          ${gearList}
-        </section>
-      </section>
-      <section class="images">
-        <img class="outer-img" src=${imageList[0]} />
-        <img class="middle-img" src=${imageList[1]} />
-        <img class="outer-img" src=${imageList[2]} />
-      </section>
     `;
   }
 }

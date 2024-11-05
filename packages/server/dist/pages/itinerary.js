@@ -65,37 +65,6 @@ class ItineraryPage {
   }
   renderBody() {
     const host = process.env.HOST || "";
-    const startDate = this.formatDate(this.data.startDate);
-    const endDate = this.formatDate(this.data.endDate);
-    const memberList = import_server.html`
-      <ul>
-        ${this.data.members.map((mem) => import_server.html`<li>${mem.name}</li>`)}
-      </ul>
-    `;
-    const campsiteList = this.data.location.campsite.map(
-      (site) => import_server.html`<li>${site}</li>`
-    );
-    let activityList = import_server.html`
-      <ul>
-        <li>No Activities Planned Yet</li>
-      </ul>
-    `;
-    if (this.data.activities) {
-      activityList = import_server.html`
-        <ul>
-          ${this.data.activities.map((act) => import_server.html`<li>${act}</li>`)}
-        </ul>
-      `;
-    }
-    const gearList = import_server.html`
-      ${this.data.gear.map(
-      (item) => import_server.html` <label key=${item}>
-            <input type="checkbox" autocomplete="off" />
-            ${item}
-          </label>`
-    )}
-    `;
-    const imageList = this.data.image_urls;
     const tripId = "671ff484e9de70a53a387f67";
     return import_server.html`
       <header>
@@ -119,50 +88,6 @@ class ItineraryPage {
         </a>
       </header>
       <itinerary-element src="/api/itineraries/${tripId}"></itinerary-element>
-      //
-      <h1>${this.data.title}</h1>
-      //
-      <h5>${startDate} - ${endDate}</h5>
-      //
-      <section class="four-sections">
-        //
-        <section>
-          //
-          <h2>Group:</h2>
-          // ${memberList} //
-        </section>
-        //
-        <section>
-          //
-          <h2>Location:</h2>
-          //
-          <ul>
-            //
-            <li>${this.data.location.region}</li>
-            // ${campsiteList} //
-          </ul>
-          //
-        </section>
-        //
-        <section>
-          //
-          <h2>Activities:</h2>
-          // ${activityList} //
-        </section>
-        //
-        <section class="gear-section">
-          //
-          <h2>Gear:</h2>
-          // ${gearList} //
-        </section>
-        //
-      </section>
-      //
-      <section class="images">
-        // <img class="outer-img" src=${imageList[0]} /> //
-        <img class="middle-img" src=${imageList[1]} /> //
-        <img class="outer-img" src=${imageList[2]} /> //
-      </section>
     `;
   }
 }

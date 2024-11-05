@@ -9,37 +9,37 @@ export class ItineraryElement extends HTMLElement {
 
   static template = html`
     <template>
-      <h1><slot name="title">Itinerary Title</slot></h1>
+      <h1><slot name="title">Trip Title</slot></h1>
       <h5>
-        <span slot="startDate">startDate</span> -
-        <span slot="endDate">endDate</span>
+        <slot name="startDate">startDate</slot> -
+        <slot name="endDate">endDate</slot>
       </h5>
       <section class="four-sections">
         <section>
           <h2>Group:</h2>
-          <ul slot="members">
+          <slot name="members">
             <li>Default User 1</li>
             <li>Default User 2</li>
-          </ul>
+          </slot>
         </section>
         <section>
           <h2>Location:</h2>
-          <ul slot="location">
+          <slot name="location">
             <li>Default Region</li>
             <li>Default Site 1</li>
             <li>Default Site 2</li>
-          </ul>
+          </slot>
         </section>
         <section>
           <h2>Activities:</h2>
-          <ul slot="activities">
+          <slot name="activities">
             <li>Default Activity 1</li>
             <li>Default Activity 2</li>
-          </ul>
+          </slot>
         </section>
         <section class="gear-section">
           <h2>Gear:</h2>
-          <slot name="gears">
+          <slot name="gear">
             <label key="random">
               <input type="checkbox" autocomplete="off" />
               Random Gear
@@ -48,10 +48,10 @@ export class ItineraryElement extends HTMLElement {
         </section>
       </section>
       <section class="images">
-        <slot name="img_urls">
-          <img class="outer-img" src="/images/2Y1.jpeg" />
+        <slot name="image_urls">
+          <img class="outer-img" src="/images/fishing.jpeg" />
           <img class="middle-img" src="/images/fishing.jpeg" />
-          <img class="outer-img" src="/images/fishing2.jpeg" />
+          <img class="outer-img" src="/images/fishing.jpeg" />
         </slot>
       </section>
     </template>
@@ -150,15 +150,13 @@ export class ItineraryElement extends HTMLElement {
           `;
         case "gear":
           return html`
-            <slot name="${key}">
-              ${value.map(
-                (item) =>
-                  html` <label key=${item.replace(/\s+/g, "_")}>
-                    <input type="checkbox" autocomplete="off" />
-                    ${item}
-                  </label>`
-              )}
-            </slot>
+            ${value.map(
+              (item) =>
+                html` <label slot="${key}" key=${item.replace(/\s+/g, "_")}>
+                  <input type="checkbox" autocomplete="off" />
+                  ${item}
+                </label>`
+            )}
           `;
         case "activities":
           if (value) {
@@ -179,11 +177,9 @@ export class ItineraryElement extends HTMLElement {
           </ul>`;
         case "image_urls":
           return html`
-            <slot name="${key}">
-              <img class="outer-img" src="${value[0]}" />
-              <img class="middle-img" src="${value[1]}" />
-              <img class="outer-img" src="${value[2]}" />
-            </slot>
+            <img slot="${key}" class="outer-img" src="${value[0]}" />
+            <img slot="${key}" class="middle-img" src="${value[1]}" />
+            <img slot="${key}" class="outer-img" src="${value[2]}" />
           `;
         case "startDate":
           const formattedStartDate = this.formatDate(new Date(value));
@@ -201,13 +197,13 @@ export class ItineraryElement extends HTMLElement {
               ${value.map((s) => html`<li>${s}</li>`)}
             </ul>`;
         default:
-          return html`<slot name="${key}">${value}</slot>`;
+          return html`<span slot="${key}">${value}</span>`;
       }
     };
 
     const fragment = entries.map(toSlot);
     console.log("FRAGMENTS", fragment);
-    this.replaceChildren(...fragment); // this is not putting the fragments in the shadow root; if i use .shadow_root.re... it removes the whole thing.
+    this.replaceChildren(...fragment); // this is not putting the fragments in the shadow root; if i use .shadowRoot.re... it removes the whole thing.
   }
 
   connectedCallback() {

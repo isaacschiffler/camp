@@ -57,7 +57,6 @@ const styles = css`
   }
 
   h2 {
-    text-align: center;
     color: var(--color-accent);
   }
 
