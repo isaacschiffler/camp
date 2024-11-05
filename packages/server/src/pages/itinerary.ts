@@ -91,7 +91,7 @@ export class ItineraryPage {
 
     // const imageList = this.data.image_urls;
 
-    const tripId = "671ff484e9de70a53a387f67";
+    const tripId = this.data._id.toString();
 
     return html`
       <header>

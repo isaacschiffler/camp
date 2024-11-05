@@ -1,4 +1,7 @@
+import { ObjectId } from "mongoose";
+
 export interface Trip {
+  _id: ObjectId;
   title: string;
   startDate: Date;
   endDate: Date;

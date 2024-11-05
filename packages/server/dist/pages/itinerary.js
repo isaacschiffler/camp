@@ -65,7 +65,7 @@ class ItineraryPage {
   }
   renderBody() {
     const host = process.env.HOST || "";
-    const tripId = "671ff484e9de70a53a387f67";
+    const tripId = this.data._id.toString();
     return import_server.html`
       <header>
         <a href="${host}index.html">

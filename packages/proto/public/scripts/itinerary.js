@@ -9,32 +9,29 @@ export class ItineraryElement extends HTMLElement {
 
   static template = html`
     <template>
-      <h1><slot name="title">Trip Title</slot></h1>
+      <h1><slot name="title"></slot></h1>
       <h5>
-        <slot name="startDate">startDate</slot> -
-        <slot name="endDate">endDate</slot>
+        <slot name="startDate"></slot> -
+        <slot name="endDate"></slot>
       </h5>
       <section class="four-sections">
         <section>
           <h2>Group:</h2>
           <slot name="members">
-            <li>Default User 1</li>
-            <li>Default User 2</li>
+            <li>Loading Users...</li>
           </slot>
         </section>
         <section>
           <h2>Location:</h2>
           <slot name="location">
-            <li>Default Region</li>
-            <li>Default Site 1</li>
-            <li>Default Site 2</li>
+            <li>Loading Region...</li>
+            <li>Loading Campsites...</li>
           </slot>
         </section>
         <section>
           <h2>Activities:</h2>
           <slot name="activities">
-            <li>Default Activity 1</li>
-            <li>Default Activity 2</li>
+            <li>Loading Activities...</li>
           </slot>
         </section>
         <section class="gear-section">
@@ -42,7 +39,7 @@ export class ItineraryElement extends HTMLElement {
           <slot name="gear">
             <label key="random">
               <input type="checkbox" autocomplete="off" />
-              Random Gear
+              Loading Gear...
             </label>
           </slot>
         </section>
@@ -202,8 +199,7 @@ export class ItineraryElement extends HTMLElement {
     };
 
     const fragment = entries.map(toSlot);
-    console.log("FRAGMENTS", fragment);
-    this.replaceChildren(...fragment); // this is not putting the fragments in the shadow root; if i use .shadowRoot.re... it removes the whole thing.
+    this.replaceChildren(...fragment);
   }
 
   connectedCallback() {
