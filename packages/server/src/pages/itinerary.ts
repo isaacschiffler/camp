@@ -22,6 +22,7 @@ export class ItineraryPage {
     const options: Intl.DateTimeFormatOptions = {
       month: "long",
       day: "numeric",
+      timeZone: "UTC",
     };
 
     const dateFormat = new Intl.DateTimeFormat("en-US", options).format(date);
@@ -90,6 +91,8 @@ export class ItineraryPage {
 
     const imageList = this.data.image_urls;
 
+    const tripId = "671ff484e9de70a53a387f67";
+
     return html`
       <header>
         <a href="${host}index.html">
@@ -111,6 +114,7 @@ export class ItineraryPage {
           </svg>
         </a>
       </header>
+      <itinerary-element src="/api/itineraries/${tripId}"></itinerary-element>
       <h1>${this.data.title}</h1>
       <h5>${startDate} - ${endDate}</h5>
       <section class="four-sections">

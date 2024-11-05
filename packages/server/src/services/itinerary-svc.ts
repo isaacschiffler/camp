@@ -1,5 +1,5 @@
 import { Trip, User, Location } from "../models";
-import { Schema, model, ObjectId } from "mongoose";
+import { Schema, model, ObjectId, Types } from "mongoose";
 
 const TripSchema = new Schema<Trip>(
   {
@@ -21,15 +21,43 @@ function index(): Promise<Trip[]> {
   return TripModel.find();
 }
 
-function get(tripId: string): Promise<Trip> {
-  return TripModel.find({ tripId: tripId })
-    .then((list) => list[0])
+function get(id: string): Promise<Trip> {
+  return TripModel.findById(id)
+    .then((trip) => {
+      if (!trip) {
+        throw new Error();
+      } else {
+        return trip;
+      }
+    })
     .catch((err) => {
       throw `${err} Trip Not Found`;
     });
 }
 
-export default { index, get };
+function create(json: Trip): Promise<Trip> {
+  const t = new TripModel(json);
+  return t.save();
+}
+
+function update(id: string, trip: Trip): Promise<Trip> {
+  return TripModel.findOneAndUpdate({ _id: new Types.ObjectId(id) }, trip, {
+    new: true,
+  }).then((updated) => {
+    if (!updated) throw `${id} not updated`;
+    else return updated as Trip;
+  });
+}
+
+function remove(id: string): Promise<void> {
+  return TripModel.findOneAndDelete({ _id: new Types.ObjectId(id) }).then(
+    (deleted) => {
+      if (!deleted) throw `${id} not deleted`;
+    }
+  );
+}
+
+export default { index, get, create, update, remove };
 
 // -------------- MOCK DATA ------------------
 
@@ -73,6 +101,6 @@ const trips: { [key: string]: Trip } = {
   //   yellowstone2: undefined,
 };
 
-export function getTrip(_: string): Trip {
-  return trips["yellowstone1"];
-}
+// export function getTrip(_: string): Trip {
+//   return trips["yellowstone1"];
+// }

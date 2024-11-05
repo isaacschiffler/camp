@@ -41,7 +41,8 @@ class ItineraryPage {
   formatDate(date) {
     const options = {
       month: "long",
-      day: "numeric"
+      day: "numeric",
+      timeZone: "UTC"
     };
     const dateFormat = new Intl.DateTimeFormat("en-US", options).format(date);
     return this.formatOrdinalDate(dateFormat);
@@ -95,6 +96,7 @@ class ItineraryPage {
     )}
     `;
     const imageList = this.data.image_urls;
+    const tripId = "671ff484e9de70a53a387f67";
     return import_server.html`
       <header>
         <a href="${host}index.html">
@@ -116,33 +118,50 @@ class ItineraryPage {
           </svg>
         </a>
       </header>
+      <itinerary-element src="/api/itineraries/${tripId}"></itinerary-element>
+      //
       <h1>${this.data.title}</h1>
+      //
       <h5>${startDate} - ${endDate}</h5>
+      //
       <section class="four-sections">
+        //
         <section>
+          //
           <h2>Group:</h2>
-          ${memberList}
+          // ${memberList} //
         </section>
+        //
         <section>
+          //
           <h2>Location:</h2>
+          //
           <ul>
+            //
             <li>${this.data.location.region}</li>
-            ${campsiteList}
+            // ${campsiteList} //
           </ul>
+          //
         </section>
+        //
         <section>
+          //
           <h2>Activities:</h2>
-          ${activityList}
+          // ${activityList} //
         </section>
+        //
         <section class="gear-section">
+          //
           <h2>Gear:</h2>
-          ${gearList}
+          // ${gearList} //
         </section>
+        //
       </section>
+      //
       <section class="images">
-        <img class="outer-img" src=${imageList[0]} />
-        <img class="middle-img" src=${imageList[1]} />
-        <img class="outer-img" src=${imageList[2]} />
+        // <img class="outer-img" src=${imageList[0]} /> //
+        <img class="middle-img" src=${imageList[1]} /> //
+        <img class="outer-img" src=${imageList[2]} /> //
       </section>
     `;
   }

@@ -18,8 +18,7 @@ var __copyProps = (to, from, except, desc) => {
 var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
 var itinerary_svc_exports = {};
 __export(itinerary_svc_exports, {
-  default: () => itinerary_svc_default,
-  getTrip: () => getTrip
+  default: () => itinerary_svc_default
 });
 module.exports = __toCommonJS(itinerary_svc_exports);
 var import_mongoose = require("mongoose");
@@ -40,12 +39,37 @@ const TripModel = (0, import_mongoose.model)("Trip", TripSchema);
 function index() {
   return TripModel.find();
 }
-function get(tripId) {
-  return TripModel.find({ tripId }).then((list) => list[0]).catch((err) => {
+function get(id) {
+  return TripModel.findById(id).then((trip) => {
+    if (!trip) {
+      throw new Error();
+    } else {
+      return trip;
+    }
+  }).catch((err) => {
     throw `${err} Trip Not Found`;
   });
 }
-var itinerary_svc_default = { index, get };
+function create(json) {
+  const t = new TripModel(json);
+  return t.save();
+}
+function update(id, trip) {
+  return TripModel.findOneAndUpdate({ _id: new import_mongoose.Types.ObjectId(id) }, trip, {
+    new: true
+  }).then((updated) => {
+    if (!updated) throw `${id} not updated`;
+    else return updated;
+  });
+}
+function remove(id) {
+  return TripModel.findOneAndDelete({ _id: new import_mongoose.Types.ObjectId(id) }).then(
+    (deleted) => {
+      if (!deleted) throw `${id} not deleted`;
+    }
+  );
+}
+var itinerary_svc_default = { index, get, create, update, remove };
 const users = [
   { name: "Isaac Schiffler", id: 1 },
   { name: "Jack Olson", id: 2 },
@@ -83,10 +107,3 @@ const trips = {
   //   glacier1: undefined,
   //   yellowstone2: undefined,
 };
-function getTrip(_) {
-  return trips["yellowstone1"];
-}
-// Annotate the CommonJS export names for ESM import in node:
-0 && (module.exports = {
-  getTrip
-});
