@@ -83,3 +83,9 @@ p {
   bottom: 10px;
   right: 10px;
 }
+
+.color-toggle {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+}

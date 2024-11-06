@@ -2,7 +2,6 @@ import { css, html, shadow } from "@calpoly/mustang";
 import reset from "./styles/reset.css.js";
 
 export class CampSiteElement extends HTMLElement {
-  // why is css not being applied to h1 and stuff?
   static template = html`
     <template>
       <header class="image">

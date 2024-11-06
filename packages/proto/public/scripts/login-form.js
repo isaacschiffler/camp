@@ -1,12 +1,13 @@
 import { css, html, shadow } from "@calpoly/mustang";
 import reset from "./styles/reset.css.js";
+import page from "./styles/page.css.js";
 
 export class LoginForm extends HTMLElement {
   static template = html`
     <template>
       <form>
         <slot name="title">
-          <h3>Sign in with Username and Password</h3>
+          <h2>Sign in with Username and Password</h2>
         </slot>
         <label>
           <span>
@@ -28,7 +29,21 @@ export class LoginForm extends HTMLElement {
   `;
 
   static styles = css`
-    /* CSS for the form here */
+    form {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+    label {
+      margin: var(--margin-s);
+      padding: 0;
+    }
+    button {
+      margin-top: var(--margin-m);
+      font-size: var(--size-type-med);
+      border-radius: var(--radius-med);
+    }
   `;
 
   constructor() {
@@ -36,7 +51,7 @@ export class LoginForm extends HTMLElement {
 
     shadow(this)
       .template(LoginForm.template)
-      .styles(reset.styles, LoginForm.styles);
+      .styles(reset.styles, page.styles, LoginForm.styles);
 
     this.form.addEventListener("submit", (event) =>
       submitLoginForm(

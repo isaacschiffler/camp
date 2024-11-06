@@ -17,21 +17,42 @@ export class LoginPage {
       ],
       styles: [
         css`
-          /* your CSS here */
+          article {
+            display: flex;
+            height: 70vh;
+            align-items: center;
+            justify-content: center;
+          }
+          h2 {
+            margin-bottom: var(--margin-m);
+          }
+          p {
+            display: flex;
+            justify-content: center;
+            margin-top: var(--margin-m);
+          }
         `,
       ],
       body: html`
         <body>
           <mu-auth provides="blazing:auth">
+            <header>
+              <a href="index.html">
+                <h1 class="logo">Backpack</h1>
+              </a>
+              <a href="profile.html">
+                <svg class="page-icons">
+                  <use href="/icons/sprite.svg#account" />
+                </svg>
+              </a>
+            </header>
             <article>
               <main class="page">
                 <login-form api="/auth/login">
-                  <h3 slot="title">Sign in and go places!</h3>
+                  <h2 slot="title">Sign in and get outside!</h2>
                 </login-form>
                 <p class="register">
-                  Or did you want to
-                  <a href="./register"> register as a new user </a>
-                  ?
+                  <a href="./register"> Register as a new user!</a>
                 </p>
               </main>
             </article>
