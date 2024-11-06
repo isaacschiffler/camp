@@ -1,4 +1,4 @@
-import { css, html, shadow } from "@calpoly/mustang";
+import { css, html, shadow, Observer } from "@calpoly/mustang";
 import reset from "./styles/reset.css.js";
 import page from "./styles/page.css.js";
 
@@ -9,6 +9,11 @@ export class HeaderElement extends HTMLElement {
         <a href="index.html">
           <h1 class="logo">Backpack</h1>
         </a>
+        <a slot="actuator">
+          Hello,&nbsp
+          <span id="userid"></span>
+        </a>
+        <button id="signout">Sign Out</button>
         <a href="profile.html">
           <svg class="page-icons">
             <use href="/icons/sprite.svg#account" />
@@ -25,5 +30,38 @@ export class HeaderElement extends HTMLElement {
     shadow(this)
       .template(HeaderElement.template)
       .styles(reset.styles, page.styles, HeaderElement.styles);
+
+    this._signout = this.shadowRoot.querySelector("#signout");
+
+    this._signout.addEventListener("click", (event) =>
+      event.relay(event, "auth:message", ["auth/signout"])
+    );
+  }
+
+  _authObserver = new Observer(this, "backpack:auth");
+
+  connectedCallback() {
+    this._userid = this.shadowRoot.querySelector("#userid");
+    this._signout = this.shadowRoot.querySelector("#signout");
+
+    this._authObserver.observe(({ user }) => {
+      if (user && user.username !== this.userid) {
+        this.userid = user.username;
+      }
+    });
+  }
+
+  get userid() {
+    return this._userid.textContent;
+  }
+
+  set userid(id) {
+    if (id === "anonymous") {
+      this._userid.textContent = "";
+      this._signout.disabled = true;
+    } else {
+      this._userid.textContent = id;
+      this._signout.disabled = false;
+    }
   }
 }
