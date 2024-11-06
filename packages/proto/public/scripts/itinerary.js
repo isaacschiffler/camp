@@ -1,4 +1,4 @@
-import { css, html, shadow } from "@calpoly/mustang";
+import { css, html, shadow, Observer } from "@calpoly/mustang";
 import reset from "./styles/reset.css.js";
 import page from "./styles/page.css.js";
 
@@ -124,8 +124,24 @@ export class ItineraryElement extends HTMLElement {
       .styles(reset.styles, ItineraryElement.styles, page.styles);
   }
 
+  _authObserver = new Observer(this, "backpack:auth");
+
+  get authorization() {
+    return (
+      this._user?.authenticated && {
+        Authorization: `Bearer ${this._user.token}`,
+      }
+    );
+  }
+
+  connectedCallback() {
+    this._authObserver.observe(({ user }) => {
+      this._user = user;
+    });
+  }
+
   hydrate(url) {
-    fetch(url)
+    fetch(url, { headers: this.authorization })
       .then((res) => {
         if (res.status !== 200) throw `Status: ${res.status}`;
         return res.json();
