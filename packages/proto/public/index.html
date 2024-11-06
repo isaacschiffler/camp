@@ -1,72 +1,106 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <link rel="stylesheet" href="/styles/page.css" />
     <link rel="stylesheet" href="/styles/tokens.css" />
     <link rel="stylesheet" href="/styles/reset.css" />
     <link rel="stylesheet" href="/styles/landing.css" />
+    <script type="importmap">
+      {
+        "imports": {
+          "@calpoly/mustang": "https://unpkg.com/@calpoly/mustang"
+        }
+      }
+    </script>
+    <script type="module">
+      import { define, Auth } from "@calpoly/mustang";
+      import { HeaderElement } from "/scripts/header.js";
+      define({
+        "mu-auth": Auth.Provider,
+        "bp-header": HeaderElement,
+      });
+
+      // HeaderElement.initializeOnce();
+
+      // dark mode toggle handling
+      const darkModeToggle = document.getElementById("darkmode-toggle");
+      darkModeToggle.addEventListener("change", function () {
+        if (this.checked) {
+          document.body.classList.add("darkmode"); // Add the darkmode class to the body
+        } else {
+          document.body.classList.remove("darkmode"); // Remove the darkmode class
+        }
+      });
+
+      const host = "http://localhost:3000/";
+    </script>
   </head>
-  <body class="landing">
-    <header>
-      <a href="index.html">
-        <h1 class="logo">Backpack</h1>
-      </a>
-      <a href="profile.html">
-        <svg class="page-icons">
-          <use href="/icons/sprite.svg#account" />
-        </svg>
-      </a>
-    </header>
-    <section class="plan">
-      <h2>Plan your trip now!</h2>
-      <header
-        class="gs-image"
-        style="background-image: url('/images/2Y1.jpeg')"
-      >
-        <a href="step1.html" class="gs-link">
-          <button class="get-started" href="step1.html">Get Started!</button>
-        </a>
-        <p>Location: Yellowstone</p>
-      </header>
-      <section class="nav-bar">
-        <ul class="nav">
-          <li>
-            <a href="step1.html">
-              <svg class="page-icons">
-                <use href="/icons/sprite.svg#campfire" />
-              </svg>
+  <body>
+    <mu-auth provides="backpack:auth">
+      <bp-header></bp-header>
+      <section class="landing">
+        <section class="plan">
+          <h2>Plan your trip now!</h2>
+          <header
+            class="gs-image"
+            style="background-image: url('/images/2Y1.jpeg')"
+          >
+            <a href="step1.html" class="gs-link">
+              <button class="get-started" href="step1.html">
+                Get Started!
+              </button>
             </a>
-          </li>
-          <li>
-            <a href="step2.html">
-              <svg class="page-icons">
-                <use href="/icons/sprite.svg#backpack" />
-              </svg>
-            </a>
-          </li>
-        </ul>
+            <p>Location: Yellowstone</p>
+          </header>
+          <section class="nav-bar">
+            <ul class="nav">
+              <li>
+                <a href="step1.html">
+                  <svg class="page-icons">
+                    <use href="/icons/sprite.svg#campfire" />
+                  </svg>
+                </a>
+              </li>
+              <li>
+                <a href="step2.html">
+                  <svg class="page-icons">
+                    <use href="/icons/sprite.svg#backpack" />
+                  </svg>
+                </a>
+              </li>
+            </ul>
+          </section>
+        </section>
+        <section class="itin">
+          <h2>See a trip you've already planned:</h2>
+          <ul class="itin">
+            <li>
+              <a
+                href="http://localhost:3000/itinerary/671ff484e9de70a53a387f67"
+              >
+                <svg class="page-icons">
+                  <use href="/icons/sprite.svg#itinerary" />
+                </svg>
+                <h4>Trip to Yellowstone</h4>
+              </a>
+            </li>
+            <li>
+              <a
+                href="http://localhost:3000/itinerary/6721180a91b98c720183ddfa"
+              >
+                <svg class="page-icons">
+                  <use href="/icons/sprite.svg#itinerary" />
+                </svg>
+                <h4>Trip to Glacier</h4>
+              </a>
+            </li>
+          </ul>
+        </section>
       </section>
-    </section>
-    <section class="itin">
-      <h2>See a trip you've already planned:</h2>
-      <ul class="itin">
-        <li>
-          <a href="itinerary.html">
-            <svg class="page-icons">
-              <use href="/icons/sprite.svg#itinerary" />
-            </svg>
-            <h4>Trip to Yellowstone</h4>
-          </a>
-        </li>
-        <li>
-          <a href="itinerary.html">
-            <svg class="page-icons">
-              <use href="/icons/sprite.svg#itinerary" />
-            </svg>
-            <h4>Trip to YS again...</h4>
-          </a>
-        </li>
-      </ul>
-    </section>
+      <label class="color-toggle">
+        <input id="darkmode-toggle" type="checkbox" autocomplete="off" />
+        Dark mode
+      </label>
+    </mu-auth>
   </body>
 </html>

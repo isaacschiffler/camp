@@ -21,29 +21,6 @@
   grid-column: 3 / 7;
 }
 
-.campsite > dl {
-  margin-top: var(--margin-s);
-}
-
-.cs-info {
-  display: grid;
-  grid-template-columns: 1fr 1fr; /* Two equal columns */
-  gap: 20px; /* Adds space between the columns */
-}
-
-.column > h3 {
-  font-family: var(--font-family-body);
-  color: var(--color-accent);
-  margin-top: var(--margin-s);
-  font-weight: normal;
-  font-size: var(--size-type-ml);
-}
-.column > ul {
-  list-style-type: none;
-  margin-left: var(--margin-m);
-  margin: 0;
-}
-
 .group {
   grid-column: 7 / end;
   display: flex;
@@ -64,6 +41,9 @@
   /* align-items: baseline; */
   display: flex;
   align-items: center;
+}
+input {
+  margin-top: 0;
 }
 
 .remove {

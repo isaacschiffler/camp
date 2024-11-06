@@ -19,12 +19,25 @@ h2 {
   text-align: left;
 }
 
+h5 {
+  margin-left: var(--margin-l);
+}
+
 ul {
   list-style-type: none;
 }
 
 p {
   margin-top: var(--margin-s);
+}
+
+.gear-section {
+  display: flex;
+  flex-direction: column;
+}
+
+input {
+  margin-right: var(--margin-s);
 }
 
 .images {
