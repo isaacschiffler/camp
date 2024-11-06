@@ -52,44 +52,7 @@ export class ItineraryPage {
   }
 
   renderBody() {
-    const host = process.env.HOST || "";
-    // const startDate = this.formatDate(this.data.startDate);
-    // const endDate = this.formatDate(this.data.endDate);
-
-    // const memberList = html`
-    //   <ul>
-    //     ${this.data.members.map((mem) => html`<li>${mem.name}</li>`)}
-    //   </ul>
-    // `;
-
-    // const campsiteList = this.data.location.campsite.map(
-    //   (site) => html`<li>${site}</li>`
-    // );
-
-    // let activityList = html`
-    //   <ul>
-    //     <li>No Activities Planned Yet</li>
-    //   </ul>
-    // `;
-    // if (this.data.activities) {
-    //   activityList = html`
-    //     <ul>
-    //       ${this.data.activities.map((act) => html`<li>${act}</li>`)}
-    //     </ul>
-    //   `;
-    // }
-
-    // const gearList = html`
-    //   ${this.data.gear.map(
-    //     (item) =>
-    //       html` <label key=${item}>
-    //         <input type="checkbox" autocomplete="off" />
-    //         ${item}
-    //       </label>`
-    //   )}
-    // `;
-
-    // const imageList = this.data.image_urls;
+    const host = process.env.HOST || "https://ischiffl.csse.dev/";
 
     const tripId = this.data._id.toString();
 

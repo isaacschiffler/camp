@@ -64,7 +64,7 @@ class ItineraryPage {
     });
   }
   renderBody() {
-    const host = process.env.HOST || "";
+    const host = process.env.HOST || "https://ischiffl.csse.dev/";
     const tripId = this.data._id.toString();
     return import_server.html`
       <header>
