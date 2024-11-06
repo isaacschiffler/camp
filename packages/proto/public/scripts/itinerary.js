@@ -141,7 +141,7 @@ export class ItineraryElement extends HTMLElement {
   }
 
   hydrate(url) {
-    fetch(url, { headers: this.authorization })
+    fetch(url)
       .then((res) => {
         if (res.status !== 200) throw `Status: ${res.status}`;
         return res.json();
