@@ -75,31 +75,31 @@ const location1: Location = {
   campsite: ["Campsite 2Y1"],
 };
 
-const trips: { [key: string]: Trip } = {
-  yellowstone1: {
-    title: "Trip to Yellowstone",
-    startDate: new Date("2024-06-25"),
-    endDate: new Date("2024-07-01"),
-    members: users,
-    location: location1,
-    activities: ["Fly Fishing", "Hiking", "Hunting"],
-    gear: [
-      "Med Supplies",
-      "Tent",
-      "Pots and Pans",
-      "Bug Spray",
-      "Bear Spray",
-      "Bear Rope",
-    ],
-    image_urls: [
-      "/images/2Y1.jpeg",
-      "/images/fishing.jpeg",
-      "/images/fishing3.jpeg",
-    ],
-  },
-  //   glacier1: undefined,
-  //   yellowstone2: undefined,
-};
+// const trips: { [key: string]: Trip } = {
+//   yellowstone1: {
+//     title: "Trip to Yellowstone",
+//     startDate: new Date("2024-06-25"),
+//     endDate: new Date("2024-07-01"),
+//     members: users,
+//     location: location1,
+//     activities: ["Fly Fishing", "Hiking", "Hunting"],
+//     gear: [
+//       "Med Supplies",
+//       "Tent",
+//       "Pots and Pans",
+//       "Bug Spray",
+//       "Bear Spray",
+//       "Bear Rope",
+//     ],
+//     image_urls: [
+//       "/images/2Y1.jpeg",
+//       "/images/fishing.jpeg",
+//       "/images/fishing3.jpeg",
+//     ],
+//   },
+//   glacier1: undefined,
+//   yellowstone2: undefined,
+// };
 
 // export function getTrip(_: string): Trip {
 //   return trips["yellowstone1"];
