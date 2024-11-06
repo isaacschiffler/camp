@@ -21,7 +21,7 @@ app.use(express.static(staticDir));
 app.use(express.json());
 
 app.use("/auth", auth);
-app.use("/api/itineraries", itineraries);
+app.use("/api/itineraries", authenticateUser, itineraries);
 app.use("/api/campsites", campsites);
 app.use("/api/regions", regions);
 

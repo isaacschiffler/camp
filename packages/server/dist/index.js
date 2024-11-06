@@ -37,7 +37,7 @@ const staticDir = process.env.STATIC || "public";
 app.use(import_express.default.static(staticDir));
 app.use(import_express.default.json());
 app.use("/auth", import_auth2.default);
-app.use("/api/itineraries", import_itineraries.default);
+app.use("/api/itineraries", import_auth2.authenticateUser, import_itineraries.default);
 app.use("/api/campsites", import_campsites.default);
 app.use("/api/regions", import_regions.default);
 app.get("/hello", (req, res) => {
