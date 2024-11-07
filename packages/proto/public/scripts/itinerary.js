@@ -1,4 +1,5 @@
-import { css, html, shadow, Observer } from "@calpoly/mustang";
+import { css, html, define, shadow, Observer, Auth } from "@calpoly/mustang";
+import { HeaderElement } from "/scripts/header.js";
 import reset from "./styles/reset.css.js";
 import page from "./styles/page.css.js";
 
@@ -6,6 +7,10 @@ export class ItineraryElement extends HTMLElement {
   get src() {
     return this.getAttribute("src");
   }
+  static uses = define({
+    "mu-auth": Auth.Provider,
+    // "bp-header": HeaderElement,
+  });
 
   static template = html`
     <template>
@@ -127,6 +132,7 @@ export class ItineraryElement extends HTMLElement {
   _authObserver = new Observer(this, "backpack:auth");
 
   get authorization() {
+    console.log("auth user: ", this._user);
     return (
       this._user?.authenticated && {
         Authorization: `Bearer ${this._user.token}`,
@@ -137,6 +143,8 @@ export class ItineraryElement extends HTMLElement {
   connectedCallback() {
     this._authObserver.observe(({ user }) => {
       this._user = user;
+      console.log("this._user", this._user);
+      if (this.src && this._user?.authenticated) this.hydrate(this.src);
     });
   }
 
@@ -216,10 +224,6 @@ export class ItineraryElement extends HTMLElement {
 
     const fragment = entries.map(toSlot);
     this.replaceChildren(...fragment);
-  }
-
-  connectedCallback() {
-    if (this.src) this.hydrate(this.src);
   }
 
   attributeChangedCallback(name, oldValue, newValue) {

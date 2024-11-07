@@ -15,11 +15,15 @@ const defaults = {
       //   }
       // });`,
     `
-      import { define } from "@calpoly/mustang";
+      import { define, Auth } from "@calpoly/mustang";
       import { ItineraryElement } from "/scripts/itinerary.js";
+      import { HeaderElement } from "/scripts/header.js";
+
 
       define({
+        "mu-auth": Auth.Provider,
         "itinerary-element": ItineraryElement,
+        "bp-header": HeaderElement,
       });
     `,
   ],

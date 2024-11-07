@@ -67,27 +67,20 @@ class ItineraryPage {
     const host = process.env.HOST || "";
     const tripId = this.data._id.toString();
     return import_server.html`
-      <header>
-        <a href="${host}index.html">
-          <h1 class="logo">Backpack</h1>
-        </a>
-        <a href="${host}profile.html">
-          <svg class="page-icons">
-            <use href="/icons/sprite.svg#account" />
-          </svg>
-        </a>
-      </header>
-      <header class="nav">
-        <a href="${host}index.html">
-          <svg class="icon">
-            <use href="/icons/sprite.svg#back" />
-          </svg>
-          <svg class="icon">
-            <use href="/icons/sprite.svg#home" />
-          </svg>
-        </a>
-      </header>
-      <itinerary-element src="/api/itineraries/${tripId}"></itinerary-element>
+      <mu-auth provides="backpack:auth">
+        <bp-header></bp-header>
+        <header class="nav">
+          <a href="${host}/index.html">
+            <svg class="icon">
+              <use href="/icons/sprite.svg#back" />
+            </svg>
+            <svg class="icon">
+              <use href="/icons/sprite.svg#home" />
+            </svg>
+          </a>
+        </header>
+        <itinerary-element src="/api/itineraries/${tripId}"></itinerary-element>
+      </mu-auth>
     `;
   }
 }
