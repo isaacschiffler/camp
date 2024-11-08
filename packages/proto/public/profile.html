@@ -5,57 +5,67 @@
     <link rel="stylesheet" href="/styles/tokens.css" />
     <link rel="stylesheet" href="/styles/reset.css" />
     <link rel="stylesheet" href="/styles/profile.css" />
+    <script type="importmap">
+      {
+        "imports": {
+          "@calpoly/mustang": "https://unpkg.com/@calpoly/mustang"
+        }
+      }
+    </script>
+    <script type="module">
+      import { define, Auth } from "@calpoly/mustang";
+      import { HeaderElement } from "/scripts/header.js";
+      define({
+        "mu-auth": Auth.Provider,
+        "bp-header": HeaderElement,
+      });
+    </script>
   </head>
-  <body class="thr-sections">
-    <header>
-      <a href="index.html">
-        <h1 class="logo">Backpack</h1>
-      </a>
-      <a href="profile.html">
-        <svg class="page-icons">
-          <use href="/icons/sprite.svg#account" />
-        </svg>
-      </a>
-    </header>
-    <header class="nav">
-      <a href="index.html">
-        <svg class="icon">
-          <use href="/icons/sprite.svg#back" />
-        </svg>
-        <svg class="icon">
-          <use href="/icons/sprite.svg#home" />
-        </svg>
-      </a>
-    </header>
-    <section id="trip" class="trip">
-      <h1>My Trips</h1>
-      <header
-        class="trip-img"
-        style="background-image: url('/images/2Y1.jpeg')"
-      >
-        <h2 class="title">Trip to Yellowstone</h2>
-      </header>
-    </section>
-    <section id="my-gear" class="my-gear">
-      <h1>My Gear</h1>
-      <h2>Trip to Yellowstone</h2>
-      <input type="checkbox" id="group1" name="group1" value="group" />
-      <label for="group1">Medical supplies</label><br />
-      <input type="checkbox" id="group2" name="group2" value="group" />
-      <label for="group2">Tent</label><br />
-      <input type="checkbox" id="group3" name="group3" value="group" />
-      <label for="group3">Pots and pans</label><br />
-      <input type="checkbox" id="group4" name="group4" value="group" />
-      <label for="group4">Bug spray</label><br />
-      <input type="checkbox" id="group5" name="group5" value="group" />
-      <label for="group5">Bear spray</label><br />
-      <input type="checkbox" id="group6" name="group6" value="group" />
-      <label for="group6">Bear rope</label><br />
-    </section>
-    <section id="request" class="request">
-      <h1>Pending Invites</h1>
-      <input type="checkbox" id="invite1" name="invite1" value="invite" />
-      <label for="invite1">2025 Yosemite Trip</label><br />
-    </section>
+  <body>
+    <mu-auth provides="backpack:auth">
+      <bp-header></bp-header>
+      <section class="thr-sections">
+        <header class="nav">
+          <a href="index.html">
+            <svg class="icon">
+              <use href="/icons/sprite.svg#back" />
+            </svg>
+            <svg class="icon">
+              <use href="/icons/sprite.svg#home" />
+            </svg>
+          </a>
+        </header>
+        <section id="trip" class="trip">
+          <h1>My Trips</h1>
+          <header
+            class="trip-img"
+            style="background-image: url('/images/2Y1.jpeg')"
+          >
+            <h2 class="title">Trip to Yellowstone</h2>
+          </header>
+        </section>
+        <section id="my-gear" class="my-gear">
+          <h1>My Gear</h1>
+          <h2>Trip to Yellowstone</h2>
+          <input type="checkbox" id="group1" name="group1" value="group" />
+          <label for="group1">Medical supplies</label><br />
+          <input type="checkbox" id="group2" name="group2" value="group" />
+          <label for="group2">Tent</label><br />
+          <input type="checkbox" id="group3" name="group3" value="group" />
+          <label for="group3">Pots and pans</label><br />
+          <input type="checkbox" id="group4" name="group4" value="group" />
+          <label for="group4">Bug spray</label><br />
+          <input type="checkbox" id="group5" name="group5" value="group" />
+          <label for="group5">Bear spray</label><br />
+          <input type="checkbox" id="group6" name="group6" value="group" />
+          <label for="group6">Bear rope</label><br />
+        </section>
+        <section id="request" class="request">
+          <h1>Pending Invites</h1>
+          <input type="checkbox" id="invite1" name="invite1" value="invite" />
+          <label for="invite1">2025 Yosemite Trip</label><br />
+        </section>
+      </section>
+    </mu-auth>
   </body>
 </html>
