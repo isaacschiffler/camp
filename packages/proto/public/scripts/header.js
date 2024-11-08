@@ -56,7 +56,7 @@ export class HeaderElement extends HTMLElement {
     .dropdown {
     }
     a[slot="actuator"] {
-      color: var(--color-dark-accent);
+      color: var(--color-main-font);
       cursor: pointer;
     }
     #userid:empty::before {
