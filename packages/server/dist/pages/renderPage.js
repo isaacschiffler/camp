@@ -8,21 +8,17 @@ var __export = (target, all) => {
     __defProp(target, name, { get: all[name], enumerable: true });
 };
 var __copyProps = (to, from, except, desc) => {
-  if ((from && typeof from === "object") || typeof from === "function") {
+  if (from && typeof from === "object" || typeof from === "function") {
     for (let key of __getOwnPropNames(from))
       if (!__hasOwnProp.call(to, key) && key !== except)
-        __defProp(to, key, {
-          get: () => from[key],
-          enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable,
-        });
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
   }
   return to;
 };
-var __toCommonJS = (mod) =>
-  __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
 var renderPage_exports = {};
 __export(renderPage_exports, {
-  default: () => renderPage,
+  default: () => renderPage
 });
 module.exports = __toCommonJS(renderPage_exports);
 var import_server = require("@calpoly/mustang/server");
@@ -31,16 +27,6 @@ const defaults = {
   styles: [],
   scripts: [
     `      
-      // dark mode toggle handling
-      // const darkModeToggle = document.getElementById("darkmode-toggle");
-      // darkModeToggle.addEventListener("change", function () {
-      //   if (this.checked) {
-      //     document.body.classList.add("darkmode"); // Add the darkmode class to the body
-      //   } else {
-      //     document.body.classList.remove("darkmode"); // Remove the darkmode class
-      //   }
-      // });`,
-    `
       import { define, Auth } from "@calpoly/mustang";
       import { ItineraryElement } from "/scripts/itinerary.js";
       import { HeaderElement } from "/scripts/header.js";
@@ -53,12 +39,12 @@ const defaults = {
       });
 
       HeaderElement.initializeOnce();
-    `,
+    `
   ],
   googleFontURL: "",
   imports: {
-    "@calpoly/mustang": "https://unpkg.com/@calpoly/mustang",
-  },
+    "@calpoly/mustang": "https://unpkg.com/@calpoly/mustang"
+  }
 };
 function renderPage(page) {
   return (0, import_server.renderWithDefaults)(page, defaults);

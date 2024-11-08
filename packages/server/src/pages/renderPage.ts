@@ -5,16 +5,6 @@ const defaults = {
   styles: [],
   scripts: [
     `      
-      // dark mode toggle handling
-      // const darkModeToggle = document.getElementById("darkmode-toggle");
-      // darkModeToggle.addEventListener("change", function () {
-      //   if (this.checked) {
-      //     document.body.classList.add("darkmode"); // Add the darkmode class to the body
-      //   } else {
-      //     document.body.classList.remove("darkmode"); // Remove the darkmode class
-      //   }
-      // });`,
-    `
       import { define, Auth } from "@calpoly/mustang";
       import { ItineraryElement } from "/scripts/itinerary.js";
       import { HeaderElement } from "/scripts/header.js";
@@ -23,17 +13,10 @@ const defaults = {
       define({
         "mu-auth": Auth.Provider,
         "itinerary-element": ItineraryElement,
-        // "bp-header": HeaderElement,
+        "bp-header": HeaderElement,
       });
 
-      const darkModeToggle = document.getElementById("darkmode-toggle");
-      darkModeToggle.addEventListener("change", function () {
-        if (this.checked) {
-          document.body.classList.add("darkmode"); // Add the darkmode class to the body
-        } else {
-          document.body.classList.remove("darkmode"); // Remove the darkmode class
-        }
-      });
+      HeaderElement.initializeOnce();
     `,
   ],
   googleFontURL: "",
