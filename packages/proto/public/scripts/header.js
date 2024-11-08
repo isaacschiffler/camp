@@ -29,6 +29,12 @@ export class HeaderElement extends HTMLElement {
               !
             </a>
             <menu>
+              <li>
+                <label class="dark-mode-switch">
+                  <input type="checkbox" />
+                  Dark Mode
+                </label>
+              </li>
               <li class="when-signed-in">
                 <a id="signout">Sign Out</a>
               </li>
@@ -53,8 +59,6 @@ export class HeaderElement extends HTMLElement {
       flex-direction: column;
       flex-basis: max-content;
     }
-    .dropdown {
-    }
     a[slot="actuator"] {
       color: var(--color-main-font);
       cursor: pointer;
@@ -74,6 +78,20 @@ export class HeaderElement extends HTMLElement {
     a:has(#userid:not(:empty)) ~ menu > .when-signed-out {
       display: none;
     }
+    li {
+      display: grid;
+    }
+    li a {
+      padding-left: var(--margin-s);
+      padding-right: var(--margin-s);
+      padding-bottom: var(--margin-s);
+      justify-self: center;
+    }
+    li label {
+      padding-left: 0;
+      padding-right: var(--margin-s);
+      justify-self: center;
+    }
   `;
 
   constructor() {
@@ -87,6 +105,14 @@ export class HeaderElement extends HTMLElement {
 
     this._signout.addEventListener("click", (event) =>
       Events.relay(event, "auth:message", ["auth/signout"])
+    );
+
+    const dm = this.shadowRoot.querySelector(".dark-mode-switch");
+
+    dm.addEventListener("click", (event) =>
+      Events.relay(event, "darkmode", {
+        checked: event.target.checked,
+      })
     );
   }
 
@@ -112,5 +138,15 @@ export class HeaderElement extends HTMLElement {
       this._userid.textContent = id;
       this._signout.disabled = false;
     }
+  }
+
+  static initializeOnce() {
+    function toggleDarkMode(page, checked) {
+      page.classList.toggle("darkmode", checked);
+    }
+
+    document.body.addEventListener("darkmode", (event) =>
+      toggleDarkMode(event.currentTarget, event.detail.checked)
+    );
   }
 }

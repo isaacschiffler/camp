@@ -19,6 +19,8 @@
         "mu-auth": Auth.Provider,
         "bp-header": HeaderElement,
       });
+
+      HeaderElement.initializeOnce();
     </script>
   </head>
   <body>
@@ -35,7 +37,9 @@
             </svg>
           </a>
           <a href="index.html">
-            <img class="icon" src="/icons/check.svg" />
+            <svg class="icon">
+              <use href="/icons/sprite.svg#check" />
+            </svg>
           </a>
         </header>
         <section id="activity" class="activity">

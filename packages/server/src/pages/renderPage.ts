@@ -23,7 +23,16 @@ const defaults = {
       define({
         "mu-auth": Auth.Provider,
         "itinerary-element": ItineraryElement,
-        "bp-header": HeaderElement,
+        // "bp-header": HeaderElement,
+      });
+
+      const darkModeToggle = document.getElementById("darkmode-toggle");
+      darkModeToggle.addEventListener("change", function () {
+        if (this.checked) {
+          document.body.classList.add("darkmode"); // Add the darkmode class to the body
+        } else {
+          document.body.classList.remove("darkmode"); // Remove the darkmode class
+        }
       });
     `,
   ],
