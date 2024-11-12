@@ -1,4 +1,13 @@
-import { css, html, define, shadow, Observer, Auth } from "@calpoly/mustang";
+import {
+  css,
+  html,
+  define,
+  shadow,
+  Observer,
+  Auth,
+  Form,
+  InputArray,
+} from "@calpoly/mustang";
 import { HeaderElement } from "/scripts/header.js";
 import reset from "./styles/reset.css.js";
 import page from "./styles/page.css.js";
@@ -7,55 +16,106 @@ export class ItineraryElement extends HTMLElement {
   get src() {
     return this.getAttribute("src");
   }
+
+  get form() {
+    return this.shadowRoot.querySelector("mu-form.edit");
+  }
+
   static uses = define({
     "mu-auth": Auth.Provider,
+    "mu-form": Form.Element,
+    "input-array": InputArray.Element,
     // "bp-header": HeaderElement,
   });
 
   static template = html`
     <template>
-      <h1><slot name="title"></slot></h1>
-      <h5>
-        <slot name="startDate"></slot> -
-        <slot name="endDate"></slot>
-      </h5>
-      <section class="four-sections">
-        <section>
-          <h2>Group:</h2>
-          <slot name="members">
-            <li>Loading Users...</li>
-          </slot>
+      <section class="view">
+        <h1><slot name="title"></slot></h1>
+        <h5>
+          <slot name="startDate"></slot> -
+          <slot name="endDate"></slot>
+        </h5>
+        <section class="four-sections">
+          <section>
+            <h2>Group:</h2>
+            <slot name="members">
+              <li>Loading Users...</li>
+            </slot>
+          </section>
+          <section>
+            <h2>Location:</h2>
+            <slot name="location">
+              <li>Loading Region...</li>
+              <li>Loading Campsites...</li>
+            </slot>
+          </section>
+          <section>
+            <h2>Activities:</h2>
+            <slot name="activities">
+              <li>Loading Activities...</li>
+            </slot>
+          </section>
+          <section class="gear-section">
+            <h2>Gear:</h2>
+            <slot name="gear">
+              <label key="random">
+                <input type="checkbox" autocomplete="off" />
+                Loading Gear...
+              </label>
+            </slot>
+          </section>
         </section>
-        <section>
-          <h2>Location:</h2>
-          <slot name="location">
-            <li>Loading Region...</li>
-            <li>Loading Campsites...</li>
-          </slot>
-        </section>
-        <section>
-          <h2>Activities:</h2>
-          <slot name="activities">
-            <li>Loading Activities...</li>
-          </slot>
-        </section>
-        <section class="gear-section">
-          <h2>Gear:</h2>
-          <slot name="gear">
-            <label key="random">
-              <input type="checkbox" autocomplete="off" />
-              Loading Gear...
-            </label>
+        <section class="images">
+          <slot name="image_urls">
+            <img class="outer-img" src="/images/fishing.jpeg" />
+            <img class="middle-img" src="/images/fishing.jpeg" />
+            <img class="outer-img" src="/images/fishing.jpeg" />
           </slot>
         </section>
       </section>
-      <section class="images">
-        <slot name="image_urls">
-          <img class="outer-img" src="/images/fishing.jpeg" />
-          <img class="middle-img" src="/images/fishing.jpeg" />
-          <img class="outer-img" src="/images/fishing.jpeg" />
-        </slot>
-      </section>
+      <mu-form class="edit">
+        <label>
+          <span>Title:</span>
+          <input name="title" />
+        </label>
+        <label>
+          <span>Start Date:</span>
+          <input type="date" name="startDate" />
+        </label>
+        <label>
+          <span>End Date:</span>
+          <input type="date" name="endDate" />
+        </label>
+        <label>
+          <span>Members: </span>
+          <input-array name="members">
+            <span slot="label-add">Add a member</span>
+          </input-array>
+        </label>
+        <label>
+          <span>Region</span>
+          <input name="region" />
+        </label>
+        <label>
+          <span>Campsites: </span>
+          <input-array name="campsites">
+            <span slot="label-add">Add a site</span>
+          </input-array>
+        </label>
+        <label>
+          <span>Activities: </span>
+          <input-array name="activities">
+            <span slot="label-add">Add an activity</span>
+          </input-array>
+        </label>
+        <label>
+          <span>Gear: </span>
+          <input-array name="gear">
+            <span slot="label-add">Add gear</span>
+          </input-array>
+        </label>
+      </mu-form>
     </template>
   `;
 
@@ -120,6 +180,30 @@ export class ItineraryElement extends HTMLElement {
     .middle-img {
       grid-column: span 3;
     }
+
+    mu-form.edit {
+      display: var(--display-editor-none, grid);
+      grid-column: 1/-1;
+      grid-template-columns: subgrid;
+    }
+
+    mu-form > label,
+    input-array {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+
+      margin-bottom: var(--margin-m);
+    }
+
+    label > input {
+      width: 300px;
+      text-align: center;
+    }
+    button[type="submit"] {
+      justify-self: center;
+    }
   `;
 
   constructor() {
@@ -127,6 +211,10 @@ export class ItineraryElement extends HTMLElement {
     shadow(this)
       .template(ItineraryElement.template)
       .styles(reset.styles, ItineraryElement.styles, page.styles);
+
+    this.addEventListener("mu-form:submit", (event) =>
+      this.submit(this.src, event.detail)
+    );
   }
 
   _authObserver = new Observer(this, "backpack:auth");
@@ -154,7 +242,23 @@ export class ItineraryElement extends HTMLElement {
         if (res.status !== 200) throw `Status: ${res.status}`;
         return res.json();
       })
-      .then((json) => this.renderSlots(json))
+      .then((json) => {
+        this.renderSlots(json);
+        console.log("json", json);
+        const json2 = {
+          // FINISH CREATING JSON2 SO THAT SLOTS ARE INSERTING CORRECTLY
+          title: json.title,
+          startDate: new Date(json.startDate),
+          endDate: new Date(json.endDate),
+          region: json.location.region,
+          members: json.members.map((member) => member.name),
+          campsites: json.location.campsite,
+          activities: json.activities,
+          gear: json.gear,
+        };
+        console.log("json2", json2);
+        this.form.init = json2;
+      })
       .catch((error) => console.log(`Failed to render data ${url}:`, error));
   }
 
@@ -229,6 +333,55 @@ export class ItineraryElement extends HTMLElement {
   attributeChangedCallback(name, oldValue, newValue) {
     if (name === "src" && oldValue !== newValue && newValue)
       this.hydrate(newValue);
+  }
+
+  submit(url, json) {
+    const method = this.mode === "new" ? "POST" : "PUT";
+    const json_formatted = {
+      title: json.title,
+      startDate: json.startDate,
+      endDate: json.endDate,
+      members: json.members.map((name, index) => ({ name: name, id: index })),
+      location: {
+        region: json.region,
+        campsite: json.campsites,
+      },
+      activities: json.activities,
+      gear: json.gear,
+    };
+
+    const json_form_v = {
+      title: json.title,
+      startDate: new Date(json.startDate),
+      endDate: new Date(json.endDate),
+      region: json_formatted.location.region,
+      members: json_formatted.members.map((member) => member.name),
+      campsites: json_formatted.location.campsite,
+      activities: json.activities,
+      gear: json.gear,
+    };
+
+    fetch(url, {
+      method,
+      headers: {
+        "Content-Type": "application/json",
+        ...this.authorization,
+      },
+      body: JSON.stringify(json_formatted),
+    })
+      .then((res) => {
+        if (res.status !== (this.mode === "new" ? 201 : 200))
+          throw `Status: ${res.status}`;
+        return res.json();
+      })
+      .then((json) => {
+        this.renderSlots(json);
+        this.form.init = json_form_v;
+        this.mode = "view";
+      })
+      .catch((error) => {
+        console.log(`Failed to submit ${url}:`, error);
+      });
   }
 
   formatDate(date) {

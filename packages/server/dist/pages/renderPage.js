@@ -27,7 +27,7 @@ const defaults = {
   styles: [],
   scripts: [
     `      
-      import { define, Auth } from "@calpoly/mustang";
+      import { define, Auth, Form } from "@calpoly/mustang";
       import { ItineraryElement } from "/scripts/itinerary.js";
       import { HeaderElement } from "/scripts/header.js";
 
