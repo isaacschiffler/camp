@@ -21,6 +21,18 @@ export class ItineraryElement extends HTMLElement {
     return this.shadowRoot.querySelector("mu-form.edit");
   }
 
+  get mode() {
+    return this.getAttribute("mode");
+  }
+
+  set mode(m) {
+    this.setAttribute("mode", m);
+  }
+
+  get editButton() {
+    return this.shadowRoot.getElementById("edit");
+  }
+
   static uses = define({
     "mu-auth": Auth.Provider,
     "mu-form": Form.Element,
@@ -31,7 +43,10 @@ export class ItineraryElement extends HTMLElement {
   static template = html`
     <template>
       <section class="view">
-        <h1><slot name="title"></slot></h1>
+        <div class="trip-head">
+          <h1><slot name="title"></slot></h1>
+          <button class="edit-btn" id="edit">Edit</button>
+        </div>
         <h5>
           <slot name="startDate"></slot> -
           <slot name="endDate"></slot>
@@ -124,6 +139,35 @@ export class ItineraryElement extends HTMLElement {
   }
 
   static styles = css`
+    :host {
+      display: contents;
+    }
+    :host([mode="edit"]),
+    :host([mode="new"]) {
+      --display-view-none: none;
+    }
+    :host([mode="view"]) {
+      --display-editor-none: none;
+    }
+
+    section.view {
+      display: var(--display-view-none, grid);
+    }
+    mu-form.edit {
+      display: var(--display-editor-none, grid);
+    }
+
+    .edit-btn {
+      width: 100px;
+      margin-right: var(--margin-s);
+    }
+    .trip-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-bottom: var(--margin-m);
+    }
+
     .four-sections {
       display: grid;
       grid-template-columns: [start] repeat(4, 1fr) [end];
@@ -137,7 +181,6 @@ export class ItineraryElement extends HTMLElement {
 
     h1 {
       font-size: var(--size-type-xl);
-      padding-bottom: var(--margin-m);
     }
 
     h2 {
@@ -215,6 +258,8 @@ export class ItineraryElement extends HTMLElement {
     this.addEventListener("mu-form:submit", (event) =>
       this.submit(this.src, event.detail)
     );
+
+    this.editButton.addEventListener("click", () => (this.mode = "edit"));
   }
 
   _authObserver = new Observer(this, "backpack:auth");

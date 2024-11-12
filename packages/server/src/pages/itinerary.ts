@@ -106,7 +106,10 @@ export class ItineraryPage {
             </svg>
           </a>
         </header>
-        <itinerary-element src="/api/itineraries/${tripId}"></itinerary-element>
+        <itinerary-element
+          src="/api/itineraries/${tripId}"
+          mode="view"
+        ></itinerary-element>
       </mu-auth>
     `;
   }
