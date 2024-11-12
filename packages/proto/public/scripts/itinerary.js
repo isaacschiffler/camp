@@ -33,6 +33,10 @@ export class ItineraryElement extends HTMLElement {
     return this.shadowRoot.getElementById("edit");
   }
 
+  get submitButton() {
+    return this.shadowRoot.getElementById("submit");
+  }
+
   static uses = define({
     "mu-auth": Auth.Provider,
     "mu-form": Form.Element,
@@ -244,8 +248,13 @@ export class ItineraryElement extends HTMLElement {
       width: 300px;
       text-align: center;
     }
-    button[type="submit"] {
+    button.submit {
       justify-self: center;
+      width: 150px;
+      margin-bottom: var(--margin-l);
+      padding: var(--margin-s);
+      font-size: var(--size-type-l);
+      border-radius: var(--radius-med);
     }
   `;
 
@@ -255,9 +264,15 @@ export class ItineraryElement extends HTMLElement {
       .template(ItineraryElement.template)
       .styles(reset.styles, ItineraryElement.styles, page.styles);
 
-    this.addEventListener("mu-form:submit", (event) =>
-      this.submit(this.src, event.detail)
-    );
+    // this.submitButton.addEventListener("click", (event) => {
+    //   console.log(event);
+    //   console.log(event.detail);
+    //   this.submit(this.src, event.detail);
+    // });
+    this.addEventListener("mu-form:submit", (event) => {
+      console.log(event);
+      this.submit(this.src, event.detail);
+    });
 
     this.editButton.addEventListener("click", () => (this.mode = "edit"));
   }
@@ -290,8 +305,7 @@ export class ItineraryElement extends HTMLElement {
       .then((json) => {
         this.renderSlots(json);
         console.log("json", json);
-        const json2 = {
-          // FINISH CREATING JSON2 SO THAT SLOTS ARE INSERTING CORRECTLY
+        const json_form = {
           title: json.title,
           startDate: new Date(json.startDate),
           endDate: new Date(json.endDate),
@@ -301,8 +315,8 @@ export class ItineraryElement extends HTMLElement {
           activities: json.activities,
           gear: json.gear,
         };
-        console.log("json2", json2);
-        this.form.init = json2;
+        console.log("json_form", json_form);
+        this.form.init = json_form;
       })
       .catch((error) => console.log(`Failed to render data ${url}:`, error));
   }
