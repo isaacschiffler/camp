@@ -40,10 +40,12 @@ class LoginPage {
         `
         import { define, Auth } from "@calpoly/mustang";
         import { LoginForm } from "/scripts/login-form.js";
+        import { HeaderElement } from "/scripts/header.js";
 
         define({
           "mu-auth": Auth.Provider,
-          "login-form": LoginForm
+          "login-form": LoginForm,
+          "bp_header": HeaderElement,
         })
         `
       ],
@@ -68,16 +70,7 @@ class LoginPage {
       body: import_server.html`
         <body>
           <mu-auth provides="blazing:auth">
-            <header>
-              <a href="index.html">
-                <h1 class="logo">Backpack</h1>
-              </a>
-              <a href="profile.html">
-                <svg class="page-icons">
-                  <use href="/icons/sprite.svg#account" />
-                </svg>
-              </a>
-            </header>
+            <bp-header></bp-header>
             <article>
               <main class="page">
                 <login-form api="/auth/login">

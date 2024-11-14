@@ -59,7 +59,7 @@ export class HomeViewElement extends LitElement {
                   <svg class="page-icons">
                     <use href="/icons/sprite.svg#itinerary" />
                   </svg>
-                  <h4>Trip to Yellowstone</h4>
+                  <h4>STATIC: Trip to Yellowstone</h4>
                 </a>
               </li>
               <li>
@@ -69,11 +69,11 @@ export class HomeViewElement extends LitElement {
                   <svg class="page-icons">
                     <use href="/icons/sprite.svg#itinerary" />
                   </svg>
-                  <h4>Trip to Glacier</h4>
+                  <h4>STATIC: Trip to Glacier</h4>
                 </a>
               </li>
+              ${tourList}
             </ul>
-            ${tourList}
           </section>
         </section>
       </main>
@@ -182,7 +182,7 @@ export class HomeViewElement extends LitElement {
   renderItem(trip: Trip) {
     return html`
       <li>
-        <a href="/itinerary/${trip.id}">
+        <a href="/itinerary/${trip._id.toString()}">
           <svg class="page-icons">
             <use href="/icons/sprite.svg#itinerary" />
           </svg>
