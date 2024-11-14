@@ -1,0 +1,52 @@
+:root {
+  --color-background-page: rgb(253, 255, 253);
+  --color-background-bottom-header: rgb(220, 255, 220);
+  --color-background-top-header: rgb(157, 255, 157);
+  --color-background-button: rgba(233, 255, 233, 0.637);
+  --color-background-input: white;
+  --color-accent: green;
+  --color-dark-accent: rgb(21, 81, 21);
+  --color-main-font: black;
+
+  --icon-fill: black;
+
+  --width-scroll-image: 100%;
+  --height-scroll-image: 70vw;
+
+  /* --font-family-body: Calibri, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif; */
+  --font-family-display: Tahoma, Verdana, Segoe, sans-serif;
+  --font-family-body: Rockwell, "Courier Bold", Courier, Georgia, Times,
+    "Times New Roman", serif;
+
+  --font-scaling: 1.333;
+  --size-type-body: 1rem;
+  --size-type-small: 0.75rem;
+  --size-type-med: 1rem;
+  --size-type-ml: 1.25rem;
+  --size-type-large: 1.5rem;
+  --size-type-xl: 2rem;
+  --size-type-xxl: 2.5rem;
+
+  --font-weight-normal: 400;
+  --font-weight-light: 200;
+  --font-weight-bold: 700;
+  --font-weight-heavy: 900;
+
+  --radius-small: 5px;
+  --radius-med: 10px;
+  --radius-large: 15px;
+
+  --border-small: 1px;
+  --border-med: 1.5px;
+  --border-large: 2px;
+
+  --font-size-important: 40px;
+
+  --header-offset: 0.5em;
+
+  --margin-xs: 5px;
+  --margin-s: 10px;
+  --margin-m: 20px;
+  --margin-l: 30px;
+  --margin-xl: 40px;
+}
