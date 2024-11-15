@@ -17,11 +17,13 @@
     <script type="module" src="/src/main"></script>
   </head>
   <body>
-    <mu-auth provides="backpack:auth">
-      <article>
-        <bp-header></bp-header>
-        <backpack-app></backpack-app>
-      </article>
-    </mu-auth>
+    <mu-history provides="backpack:history">
+      <mu-auth provides="backpack:auth" redirect="/login.html">
+        <article>
+          <bp-header></bp-header>
+          <backpack-app></backpack-app>
+        </article>
+      </mu-auth>
+    </mu-history>
   </body>
 </html>

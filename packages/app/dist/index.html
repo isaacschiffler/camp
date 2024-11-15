@@ -14,14 +14,16 @@
 
       const host = "http://localhost:3000/";
     </script> -->
-    <script type="module" crossorigin src="/assets/index-Cv13sWL-.js"></script>
+    <script type="module" crossorigin src="/assets/index-CUKqGyQC.js"></script>
   </head>
   <body>
-    <mu-auth provides="backpack:auth">
-      <article>
-        <bp-header></bp-header>
-        <backpack-app></backpack-app>
-      </article>
-    </mu-auth>
+    <mu-history provides="backpack:history">
+      <mu-auth provides="backpack:auth" redirect="/login.html">
+        <article>
+          <bp-header></bp-header>
+          <backpack-app></backpack-app>
+        </article>
+      </mu-auth>
+    </mu-history>
   </body>
 </html>

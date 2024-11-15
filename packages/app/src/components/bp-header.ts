@@ -114,10 +114,3 @@ export class BackpackHeaderElement extends LitElement {
     );
   }
 }
-
-// function toggleDarkMode(ev: InputEvent) {
-//   const target = ev.target as HTMLInputElement;
-//   const checked = target.checked;
-
-//   Events.relay(ev, "darkmode", { checked });
-// }

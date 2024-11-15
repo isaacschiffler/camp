@@ -23,8 +23,8 @@ export class HomeViewElement extends LitElement {
               class="gs-image"
               style="background-image: url('/images/2Y1.jpeg')"
             >
-              <a href="step1.html" class="gs-link">
-                <button class="get-started" href="step1.html">
+              <a href="app/step1" class="gs-link">
+                <button class="get-started" href="app/step1">
                   Get Started!
                 </button>
               </a>
@@ -33,7 +33,7 @@ export class HomeViewElement extends LitElement {
             <section class="nav-bar">
               <ul class="nav">
                 <li>
-                  <a href="step1.html">
+                  <a href="app/step1">
                     <svg class="page-icons">
                       <use href="/icons/sprite.svg#campfire" />
                     </svg>

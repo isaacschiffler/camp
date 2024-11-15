@@ -41,7 +41,6 @@ export class ItineraryElement extends HTMLElement {
     "mu-auth": Auth.Provider,
     "mu-form": Form.Element,
     "input-array": InputArray.Element,
-    // "bp-header": HeaderElement,
   });
 
   static template = html`
@@ -264,11 +263,6 @@ export class ItineraryElement extends HTMLElement {
       .template(ItineraryElement.template)
       .styles(reset.styles, ItineraryElement.styles, page.styles);
 
-    // this.submitButton.addEventListener("click", (event) => {
-    //   console.log(event);
-    //   console.log(event.detail);
-    //   this.submit(this.src, event.detail);
-    // });
     this.addEventListener("mu-form:submit", (event) => {
       console.log(event);
       this.submit(this.src, event.detail);
