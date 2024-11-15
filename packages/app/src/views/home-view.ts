@@ -200,12 +200,8 @@ export class HomeViewElement extends LitElement {
         if (res.status === 200) return res.json();
         throw `Server responded with status ${res.status}`;
       })
-      .then((json: unknown) => {
-        if (json) {
-          const { trips } = json as { trips: Array<Trip> };
-          console.log("TRIPS", trips);
-          this.tripIndex = trips;
-        }
+      .then((json: Array<Trip>) => {
+        this.tripIndex = json;
       })
       .catch((err) => console.log("Failed to tour data:", err));
   }
