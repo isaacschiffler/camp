@@ -9,10 +9,10 @@ export class HomeViewElement extends LitElement {
   src = "http://localhost:3000/api/itineraries/";
 
   @state()
-  tourIndex = new Array<Trip>();
+  tripIndex = new Array<Trip>();
 
   render() {
-    const tourList = this.tourIndex.map(this.renderItem);
+    const tripList = this.tripIndex.map(this.renderItem);
 
     return html`
       <main class="page">
@@ -72,7 +72,7 @@ export class HomeViewElement extends LitElement {
                   <h4>STATIC: Trip to Glacier</h4>
                 </a>
               </li>
-              ${tourList}
+              ${tripList}
             </ul>
           </section>
         </section>
@@ -203,13 +203,14 @@ export class HomeViewElement extends LitElement {
       .then((json: unknown) => {
         if (json) {
           const { trips } = json as { trips: Array<Trip> };
-          this.tourIndex = trips;
+          console.log("TRIPS", trips);
+          this.tripIndex = trips;
         }
       })
       .catch((err) => console.log("Failed to tour data:", err));
   }
 
-  _authObserver = new Observer<Auth.Model>(this, "blazing:auth");
+  _authObserver = new Observer<Auth.Model>(this, "backpack:auth");
 
   _user = new Auth.User();
 
@@ -219,10 +220,7 @@ export class HomeViewElement extends LitElement {
       if (user) {
         this._user = user;
       }
-      //   this.hydrate(this.src);
+      this.hydrate(this.src);
     });
-    this.hydrate(this.src);
   }
-
-  // more to come
 }

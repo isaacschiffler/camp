@@ -13,7 +13,7 @@ export class LoginPage {
         define({
           "mu-auth": Auth.Provider,
           "login-form": LoginForm,
-          "bp_header": HeaderElement,
+          "bp-header": HeaderElement,
         })
         `,
       ],

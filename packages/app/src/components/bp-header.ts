@@ -3,6 +3,10 @@ import { define, Dropdown, Events } from "@calpoly/mustang";
 import pageCSS from "../styles/page.css";
 import resetCSS from "../styles/reset.css";
 
+function signOut(ev: MouseEvent) {
+  Events.relay(ev, "auth:message", ["auth/signout"]);
+}
+
 export class BackpackHeaderElement extends LitElement {
   static uses = define({
     "mu-dropdown": Dropdown.Element,
@@ -35,7 +39,7 @@ export class BackpackHeaderElement extends LitElement {
                 </label>
               </li>
               <li class="when-signed-in">
-                <a id="signout">Sign Out</a>
+                <a id="signout" @click=${signOut}>Sign Out</a>
               </li>
               <li class="when-signed-out">
                 <a href="/login">Sign In</a>
