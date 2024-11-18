@@ -22,6 +22,8 @@ var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__ge
   mod
 ));
 var import_express = __toESM(require("express"));
+var import_promises = __toESM(require("node:fs/promises"));
+var import_path = __toESM(require("path"));
 var import_itinerary = require("./pages/itinerary");
 var import_auth = require("./pages/auth");
 var import_mongo = require("./services/mongo");
@@ -54,6 +56,10 @@ app.get("/itinerary/:tripId", (req, res) => {
 app.get("/login", (req, res) => {
   const page = new import_auth.LoginPage();
   res.set("Content-Type", "text/html").send(page.render());
+});
+app.use("/app", (req, res) => {
+  const indexHtml = import_path.default.resolve(staticDir, "index.html");
+  import_promises.default.readFile(indexHtml, { encoding: "utf8" }).then((html) => res.send(html));
 });
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);
