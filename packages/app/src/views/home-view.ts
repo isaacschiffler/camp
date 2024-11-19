@@ -53,9 +53,7 @@ export class HomeViewElement extends LitElement {
             <h2>See a trip you've already planned:</h2>
             <ul class="itin">
               <li>
-                <a
-                  href="http://localhost:3000/itinerary/671ff484e9de70a53a387f67"
-                >
+                <a href="app/itinerary/671ff484e9de70a53a387f67">
                   <svg class="page-icons">
                     <use href="/icons/sprite.svg#itinerary" />
                   </svg>
@@ -63,9 +61,7 @@ export class HomeViewElement extends LitElement {
                 </a>
               </li>
               <li>
-                <a
-                  href="http://localhost:3000/itinerary/6721180a91b98c720183ddfa"
-                >
+                <a href="app/itinerary/6721180a91b98c720183ddfa">
                   <svg class="page-icons">
                     <use href="/icons/sprite.svg#itinerary" />
                   </svg>
@@ -182,7 +178,7 @@ export class HomeViewElement extends LitElement {
   renderItem(trip: Trip) {
     return html`
       <li>
-        <a href="/itinerary/${trip._id.toString()}">
+        <a href="app/itinerary/${trip._id.toString()}">
           <svg class="page-icons">
             <use href="/icons/sprite.svg#itinerary" />
           </svg>

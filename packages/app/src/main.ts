@@ -1,15 +1,23 @@
-import { Auth, History, Switch, define } from "@calpoly/mustang";
+import { Auth, History, Switch, define, Store } from "@calpoly/mustang";
 import { html, LitElement } from "lit";
+import { Msg } from "./messages";
+import { Model, init } from "./model";
+import update from "./update";
 import { BackpackHeaderElement } from "./components/bp-header";
 import { HomeViewElement } from "./views/home-view";
 import { LoginViewElement } from "./views/login-view";
 import { Step1View } from "./views/step1-view";
+import { ItineraryViewElement } from "./views/itinerary-view";
 
 const routes: Switch.Route[] = [
   {
     path: "/app/itinerary/:id",
-    view: (params: Switch.Params) => html`
-      <!-- <tour-view tour-id=${params.id}></tour-view> -->
+    view: (params: Switch.Params, query?: URLSearchParams) => html`
+      <itinerary-view
+        tripid=${params.id}
+        mode=${query?.has("edit") ? "edit" : query?.has("new") ? "new" : "view"}
+      >
+      </itinerary-view>
     `,
   },
   {
@@ -31,6 +39,7 @@ class AppElement extends LitElement {
     "home-view": HomeViewElement,
     "login-view": LoginViewElement,
     "step1-view": Step1View,
+    "itinerary-view": ItineraryViewElement,
   });
 
   protected render() {
@@ -49,6 +58,11 @@ define({
   "mu-switch": class AppSwitch extends Switch.Element {
     constructor() {
       super(routes, "backpack:history", "backpack:auth");
+    }
+  },
+  "mu-store": class AppStore extends Store.Provider<Model, Msg> {
+    constructor() {
+      super(update, init, "backpack:auth");
     }
   },
   "backpack-app": AppElement,

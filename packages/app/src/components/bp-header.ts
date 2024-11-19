@@ -1,5 +1,6 @@
 import { LitElement, css, html } from "lit";
-import { define, Dropdown, Events } from "@calpoly/mustang";
+import { define, Dropdown, Events, Observer, Auth } from "@calpoly/mustang";
+import { state } from "lit/decorators.js";
 import pageCSS from "../styles/page.css";
 import resetCSS from "../styles/reset.css";
 
@@ -7,10 +8,20 @@ function signOut(ev: MouseEvent) {
   Events.relay(ev, "auth:message", ["auth/signout"]);
 }
 
+function toggleDarkMode(ev: InputEvent) {
+  const target = ev.target as HTMLInputElement;
+  const checked = target.checked;
+
+  Events.relay(ev, "darkmode", { checked });
+}
+
 export class BackpackHeaderElement extends LitElement {
   static uses = define({
     "mu-dropdown": Dropdown.Element,
   });
+
+  @state()
+  userid: string = "camper";
 
   render() {
     return html`
@@ -22,18 +33,12 @@ export class BackpackHeaderElement extends LitElement {
           <mu-dropdown class="dropdown">
             <a slot="actuator">
               Hi,&nbsp
-              <span id="userid"></span>
+              <span id="userid">${this.userid}</span>
               !
             </a>
             <menu>
               <li>
-                <label
-                  @click=${(event: InputEvent) =>
-                    Events.relay(event, "darkmode", {
-                      checked: (event.target as HTMLInputElement).checked,
-                    })}
-                  class="dark-mode-switch"
-                >
+                <label @change=${toggleDarkMode} class="dark-mode-switch">
                   <input type="checkbox" autocomplete="off" />
                   Dark Mode
                 </label>
@@ -100,6 +105,18 @@ export class BackpackHeaderElement extends LitElement {
       }
     `,
   ];
+
+  _authObserver = new Observer<Auth.Model>(this, "backpack:auth");
+
+  connectedCallback() {
+    super.connectedCallback();
+
+    this._authObserver.observe(({ user }) => {
+      if (user && user.username !== this.userid) {
+        this.userid = user.username;
+      }
+    });
+  }
 
   static initializeOnce() {
     function toggleDarkMode(page: HTMLElement, checked: boolean) {

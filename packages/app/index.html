@@ -5,24 +5,17 @@
     <link rel="stylesheet" href="/styles/tokens.css" />
     <link rel="stylesheet" href="/styles/reset.css" />
     <link rel="stylesheet" href="/styles/landing.css" />
-    <!-- <script type="module">
-      import { BackpackHeaderElement } from "/src/components/bp-header";
-      import { define, Auth, Events } from "@calpoly/mustang";
-
-      define({ "mu-auth": Auth.Provider, "bp-header": BackpackHeaderElement });
-      window.relayEvent = Events.relay;
-
-      const host = "http://localhost:3000/";
-    </script> -->
     <script type="module" src="/src/main"></script>
   </head>
   <body>
     <mu-history provides="backpack:history">
-      <mu-auth provides="backpack:auth" redirect="/login.html">
-        <article>
-          <bp-header></bp-header>
-          <backpack-app></backpack-app>
-        </article>
+      <mu-auth provides="backpack:auth" redirect="/login">
+        <mu-store provides="backpack:model">
+          <article>
+            <bp-header></bp-header>
+            <backpack-app></backpack-app>
+          </article>
+        </mu-store>
       </mu-auth>
     </mu-history>
   </body>
