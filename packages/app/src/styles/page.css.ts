@@ -43,12 +43,14 @@ const styles = css`
     background-image: none;
     height: auto;
     margin-bottom: var(--margin-m);
+    margin-top: var(--margin-s);
   }
 
   h1 {
     text-align: center;
     width: fit-content;
     margin-left: var(--header-offset);
+    font-size: var(--size-type-large);
   }
   h1.logo {
     font-size: var(--size-type-xxl);

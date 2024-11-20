@@ -16,7 +16,16 @@ export default function update(
       break;
     // put the rest of your cases here
     case "trip/save":
-      saveTrip(message[1], user);
+      saveTrip(message[1], user)
+        .then((trip) => apply((model) => ({ ...model, trip })))
+        .then(() => {
+          const { onSuccess } = message[1];
+          if (onSuccess) onSuccess();
+        })
+        .catch((error: Error) => {
+          const { onFailure } = message[1];
+          if (onFailure) onFailure(error);
+        });
       break;
     default:
       const unhandled: never = message[0];
@@ -43,8 +52,20 @@ function selectTrip(msg: { tripId: string }, user: Auth.User) {
 }
 
 function saveTrip(msg: { tripId: string; trip: Trip }, user: Auth.User) {
-  if (msg && user) {
-    return true;
-  }
-  return true;
+  return fetch(`/api/itineraries/${msg.tripId}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      ...Auth.headers(user),
+    },
+    body: JSON.stringify(msg.trip),
+  })
+    .then((response: Response) => {
+      if (response.status === 200) return response.json();
+      else throw new Error(`Failed to save profile for ${msg.tripId}`);
+    })
+    .then((json: unknown) => {
+      if (json) return json as Trip;
+      return undefined;
+    });
 }

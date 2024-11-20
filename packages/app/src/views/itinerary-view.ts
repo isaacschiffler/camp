@@ -1,4 +1,4 @@
-import { define, View, Form, InputArray } from "@calpoly/mustang";
+import { define, View, Form, InputArray, History } from "@calpoly/mustang";
 import { css, html } from "lit";
 import { property, state } from "lit/decorators.js";
 import { Trip, User } from "server/models";
@@ -85,116 +85,121 @@ export class ItineraryViewElement extends View<Model, Msg> {
   render() {
     if (this.trip) {
       return html`
-        <header class="nav">
-          <a href="/app">
-            <svg class="icon">
-              <use href="/icons/sprite.svg#back" />
-            </svg>
-            <svg class="icon">
-              <use href="/icons/sprite.svg#home" />
-            </svg>
-          </a>
-        </header>
-        <section class="view">
-          <div class="trip-head">
-            <h1>${this.trip.title}</h1>
-            <button
-              class="edit-btn"
-              id="edit"
-              @click=${() => (this.mode = "edit")}
-            >
-              Edit
-            </button>
-          </div>
-          <h5>
-            ${formatDate(new Date(this.trip.startDate))} -
-            ${formatDate(new Date(this.trip.endDate))}
-          </h5>
-          <section class="four-sections">
-            <section>
-              <h2>Group:</h2>
-              <ul>
-                ${this.trip.members.map(
-                  (userObj: User) => html`<li>${userObj.name}</li>`
+        <section
+          mu-form:submit=${(event: Form.SubmitEvent<Trip>) =>
+            this._handleSubmit(event)}
+        >
+          <header class="nav">
+            <a href="/app">
+              <svg class="icon">
+                <use href="/icons/sprite.svg#back" />
+              </svg>
+              <svg class="icon">
+                <use href="/icons/sprite.svg#home" />
+              </svg>
+            </a>
+          </header>
+          <section class="view">
+            <div class="trip-head">
+              <h1>${this.trip.title}</h1>
+              <button
+                class="edit-btn"
+                id="edit"
+                @click=${() => (this.mode = "edit")}
+              >
+                Edit
+              </button>
+            </div>
+            <h5>
+              ${formatDate(new Date(this.trip.startDate))} -
+              ${formatDate(new Date(this.trip.endDate))}
+            </h5>
+            <section class="four-sections">
+              <section>
+                <h2>Group:</h2>
+                <ul>
+                  ${this.trip.members.map(
+                    (userObj: User) => html`<li>${userObj.name}</li>`
+                  )}
+                </ul>
+              </section>
+              <section>
+                <h2>Location:</h2>
+                <ul>
+                  <li>${this.trip.location.region}</li>
+                  ${this.trip.location.campsite.map(
+                    (site: string) => html`<li>${site}</li>`
+                  )}
+                </ul>
+              </section>
+              <section>
+                <h2>Activities:</h2>
+                <ul>
+                  ${this.trip.activities?.map(
+                    (act: string) => html`<li>${act}</li>`
+                  )}
+                </ul>
+              </section>
+              <section class="gear-section">
+                <h2>Gear:</h2>
+                ${this.trip.gear.map(
+                  (item: string) =>
+                    html` <label key=${item.replace(/\s+/g, "_")}>
+                      <input type="checkbox" autocomplete="off" />
+                      ${item}
+                    </label>`
                 )}
-              </ul>
+              </section>
             </section>
-            <section>
-              <h2>Location:</h2>
-              <ul>
-                <li>${this.trip.location.region}</li>
-                ${this.trip.location.campsite.map(
-                  (site: string) => html`<li>${site}</li>`
-                )}
-              </ul>
-            </section>
-            <section>
-              <h2>Activities:</h2>
-              <ul>
-                ${this.trip.activities?.map(
-                  (act: string) => html`<li>${act}</li>`
-                )}
-              </ul>
-            </section>
-            <section class="gear-section">
-              <h2>Gear:</h2>
-              ${this.trip.gear.map(
-                (item: string) =>
-                  html` <label key=${item.replace(/\s+/g, "_")}>
-                    <input type="checkbox" autocomplete="off" />
-                    ${item}
-                  </label>`
-              )}
+            <section class="images">
+              <img class="outer-img" src="${this.trip.image_urls[0]}" />
+              <img class="middle-img" src="${this.trip.image_urls[1]}" />
+              <img class="outer-img" src="${this.trip.image_urls[2]}" />
             </section>
           </section>
-          <section class="images">
-            <img class="outer-img" src="${this.trip.image_urls[0]}" />
-            <img class="middle-img" src="${this.trip.image_urls[1]}" />
-            <img class="outer-img" src="${this.trip.image_urls[2]}" />
-          </section>
+          <mu-form class="edit" .init=${this._trip}>
+            <label>
+              <span>Title:</span>
+              <input name="title" />
+            </label>
+            <label>
+              <span>Start Date:</span>
+              <input type="date" name="startDate" />
+            </label>
+            <label>
+              <span>End Date:</span>
+              <input type="date" name="endDate" />
+            </label>
+            <label>
+              <span>Members: </span>
+              <input-array name="members">
+                <span slot="label-add">Add a member</span>
+              </input-array>
+            </label>
+            <label>
+              <span>Region</span>
+              <input name="region" />
+            </label>
+            <label>
+              <span>Campsites: </span>
+              <input-array name="campsites">
+                <span slot="label-add">Add a site</span>
+              </input-array>
+            </label>
+            <label>
+              <span>Activities: </span>
+              <input-array name="activities">
+                <span slot="label-add">Add an activity</span>
+              </input-array>
+            </label>
+            <label>
+              <span>Gear: </span>
+              <input-array name="gear">
+                <span slot="label-add">Add gear</span>
+              </input-array>
+            </label>
+          </mu-form>
         </section>
-        <mu-form class="edit" .init=${this._trip}>
-          <label>
-            <span>Title:</span>
-            <input name="title" />
-          </label>
-          <label>
-            <span>Start Date:</span>
-            <input type="date" name="startDate" />
-          </label>
-          <label>
-            <span>End Date:</span>
-            <input type="date" name="endDate" />
-          </label>
-          <label>
-            <span>Members: </span>
-            <input-array name="members">
-              <span slot="label-add">Add a member</span>
-            </input-array>
-          </label>
-          <label>
-            <span>Region</span>
-            <input name="region" />
-          </label>
-          <label>
-            <span>Campsites: </span>
-            <input-array name="campsites">
-              <span slot="label-add">Add a site</span>
-            </input-array>
-          </label>
-          <label>
-            <span>Activities: </span>
-            <input-array name="activities">
-              <span slot="label-add">Add an activity</span>
-            </input-array>
-          </label>
-          <label>
-            <span>Gear: </span>
-            <input-array name="gear">
-              <span slot="label-add">Add gear</span>
-            </input-array>
-          </label>
-        </mu-form>
       `;
     } else {
       return html` <h1>TRIP NOT FOUND...</h1> `;
@@ -326,5 +331,23 @@ export class ItineraryViewElement extends View<Model, Msg> {
       console.log("dispatching trip/select");
       this.dispatchMessage(["trip/select", { tripId: newValue }]);
     }
+  }
+
+  _handleSubmit(event: Form.SubmitEvent<Trip>) {
+    console.log("Handling submit of mu-form");
+    const trip = event.detail;
+    console.log("TRIP ON SUBMIT:", trip);
+    this.dispatchMessage([
+      "trip/save",
+      {
+        tripId: this.tripid ? this.tripid : "",
+        trip,
+        onSuccess: () =>
+          History.dispatch(this, "history/navigate", {
+            href: `/app/trip/${this.tripid}`,
+          }),
+        onFailure: (error: Error) => console.log("ERROR:", error),
+      },
+    ]);
   }
 }

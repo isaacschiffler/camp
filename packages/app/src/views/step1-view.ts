@@ -13,7 +13,7 @@ export class Step1View extends LitElement {
       <main class="page">
         <section class="thr-sections">
           <header class="nav">
-            <a href="index.html">
+            <a href="/app">
               <svg class="icon">
                 <use href="/icons/sprite.svg#back" />
               </svg>
@@ -21,7 +21,7 @@ export class Step1View extends LitElement {
                 <use href="/icons/sprite.svg#home" />
               </svg>
             </a>
-            <a href="step2.html">
+            <a href="/app/step2">
               <svg class="icon">
                 <use href="/icons/sprite.svg#backpack" />
               </svg>

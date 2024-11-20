@@ -52,7 +52,7 @@ export class BackpackHeaderElement extends LitElement {
             </menu>
           </mu-dropdown>
         </nav>
-        <a href="profile.html">
+        <a href="/app/profile">
           <svg class="page-icons">
             <use href="/icons/sprite.svg#account" />
           </svg>

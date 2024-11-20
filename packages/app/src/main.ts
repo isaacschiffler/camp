@@ -7,7 +7,9 @@ import { BackpackHeaderElement } from "./components/bp-header";
 import { HomeViewElement } from "./views/home-view";
 import { LoginViewElement } from "./views/login-view";
 import { Step1View } from "./views/step1-view";
+import { Step2View } from "./views/step2-view";
 import { ItineraryViewElement } from "./views/itinerary-view";
+import { ProfileViewElement } from "./views/profile-view";
 
 const routes: Switch.Route[] = [
   {
@@ -25,6 +27,14 @@ const routes: Switch.Route[] = [
     view: () => html` <step1-view></step1-view>`,
   },
   {
+    path: "/app/step2",
+    view: () => html` <step2-view></step2-view>`,
+  },
+  {
+    path: "/app/profile",
+    view: () => html` <profile-view></profile-view>`,
+  },
+  {
     path: "/app",
     view: () => html` <home-view></home-view> `,
   },
@@ -39,7 +49,9 @@ class AppElement extends LitElement {
     "home-view": HomeViewElement,
     "login-view": LoginViewElement,
     "step1-view": Step1View,
+    "step2-view": Step2View,
     "itinerary-view": ItineraryViewElement,
+    "profile-view": ProfileViewElement,
   });
 
   protected render() {
