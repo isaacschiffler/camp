@@ -1,4 +1,4 @@
-import { View } from "@calpoly/mustang";
+import { define, View, Form, InputArray } from "@calpoly/mustang";
 import { css, html } from "lit";
 import { property, state } from "lit/decorators.js";
 import { Trip, User } from "server/models";
@@ -33,6 +33,17 @@ function formatOrdinalDate(dateString: String) {
   return `${month} ${dayNumber}${suffix}`;
 }
 
+interface TransformedTrip {
+  title: string;
+  startDate: Date;
+  endDate: Date;
+  region: string;
+  members: string[];
+  campsites: string[];
+  activities?: string[];
+  gear: string[];
+}
+
 export class ItineraryViewElement extends View<Model, Msg> {
   @property()
   tripid?: string;
@@ -45,9 +56,31 @@ export class ItineraryViewElement extends View<Model, Msg> {
     return this.model.trip;
   }
 
+  @state()
+  get _trip(): TransformedTrip | undefined {
+    if (this.trip) {
+      return {
+        title: this.trip.title,
+        startDate: new Date(this.trip.startDate),
+        endDate: new Date(this.trip.endDate),
+        region: this.trip.location.region,
+        members: this.trip.members.map((member) => member.name),
+        campsites: this.trip.location.campsite,
+        activities: this.trip.activities,
+        gear: this.trip.gear,
+      };
+    }
+    return undefined;
+  }
+
   constructor() {
     super("backpack:model");
   }
+
+  static uses = define({
+    "mu-form": Form.Element,
+    "input-array": InputArray.Element,
+  });
 
   render() {
     if (this.trip) {
@@ -120,7 +153,7 @@ export class ItineraryViewElement extends View<Model, Msg> {
             <img class="outer-img" src="${this.trip.image_urls[2]}" />
           </section>
         </section>
-        <mu-form class="edit">
+        <mu-form class="edit" .init=${this._trip}>
           <label>
             <span>Title:</span>
             <input name="title" />
