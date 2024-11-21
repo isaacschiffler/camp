@@ -60,7 +60,7 @@ export class CampsiteElement extends LitElement {
       }
 
       h1.title {
-        background-color: rgba(245, 245, 245, 0.482);
+        background-color: var(--color-background-image-title);
         width: 100%;
         height: fit-content;
         padding: 10px;

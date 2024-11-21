@@ -8,6 +8,7 @@ body.darkmode {
   --color-background-page: rgb(0, 28, 0);
   --color-background-bottom-header: rgb(0, 50, 0);
   --color-background-top-header: rgb(51, 117, 51);
+  --color-background-image-title: rgba(0, 0, 0, 0.482);
   --icon-fill: white;
   --color-accent: rgb(218, 255, 218);
   --color-main-font: rgb(248, 255, 248);

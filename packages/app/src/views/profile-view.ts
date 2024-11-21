@@ -103,7 +103,7 @@ export class ProfileViewElement extends LitElement {
       }
 
       h2.title {
-        background-color: rgba(245, 245, 245, 0.482);
+        background-color: var(--color-background-image-title);
         width: 100%;
         text-align: center;
       }
