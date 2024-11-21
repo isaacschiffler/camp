@@ -40,7 +40,7 @@ export class HomeViewElement extends LitElement {
                   </a>
                 </li>
                 <li>
-                  <a href="step2.html">
+                  <a href="app/step2">
                     <svg class="page-icons">
                       <use href="/icons/sprite.svg#backpack" />
                     </svg>
@@ -52,22 +52,6 @@ export class HomeViewElement extends LitElement {
           <section class="itin">
             <h2>See a trip you've already planned:</h2>
             <ul class="itin">
-              <li>
-                <a href="app/itinerary/671ff484e9de70a53a387f67">
-                  <svg class="page-icons">
-                    <use href="/icons/sprite.svg#itinerary" />
-                  </svg>
-                  <h4>STATIC: Trip to Yellowstone</h4>
-                </a>
-              </li>
-              <li>
-                <a href="app/itinerary/6721180a91b98c720183ddfa">
-                  <svg class="page-icons">
-                    <use href="/icons/sprite.svg#itinerary" />
-                  </svg>
-                  <h4>STATIC: Trip to Glacier</h4>
-                </a>
-              </li>
               ${tripList}
             </ul>
           </section>

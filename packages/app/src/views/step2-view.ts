@@ -93,12 +93,11 @@ export class Step2View extends LitElement {
             <label for="breakfast3">Oatmeal</label><br />
             <h2>3 Lunches</h2>
             <input type="checkbox" id="lunch1" name="lunch1" value="lunch" />
-            <label for="lunch1">PB&J Tortillas + Summer Sausage + Cheese</label
-            ><br />
+            <label for="lunch1">PB&J Tortillas + Sum Saus + Cheese</label><br />
             <input type="checkbox" id="lunch2" name="lunch2" value="lunch" />
             <label for="lunch2">Hamburger Helper</label><br />
             <input type="checkbox" id="lunch3" name="lunch3" value="lunch" />
-            <label for="lunch3">Ham/Turkey and Cheese Sandwiches</label><br />
+            <label for="lunch3">Ham/Turkey + Cheese Sammies</label><br />
             <h2>3 Dinners</h2>
             <input type="checkbox" id="dinner1" name="dinner1" value="dinner" />
             <label for="dinner1">Steak and Mashed</label><br />
@@ -126,7 +125,7 @@ export class Step2View extends LitElement {
       .thr-sections {
         display: grid;
         grid-template-columns: [start] repeat(7, 1fr) [end];
-        gap: 5px;
+        gap: var(--margin-s);
       }
 
       .thr-sections > header {
