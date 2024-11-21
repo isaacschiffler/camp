@@ -1298,12 +1298,18 @@ Expecting `+Et.join(", ")+", got '"+(this.terminals_[w]||w)+"'":Zt="Parse error 
           `))??v`<p>All gear prepared.</p>`}
       </section>
     `}renderTripImage(t){return v`
-      <header
-        class="trip-img"
-        style="background-image: url(${t.image_urls[1]})"
+      <a
+        class="trip-link"
+        href="/app/itinerary/${t._id.toString()}"
+        style="text-decoration: none; color: inherit;"
       >
-        <h2 class="title">${t.title}</h2>
-      </header>
+        <header
+          class="trip-img"
+          style="background-image: url(${t.image_urls[1]})"
+        >
+          <h2 class="title">${t.title}</h2>
+        </header>
+      </a>
     `}};Ce.styles=[N,U,k`
       .thr-sections {
         display: grid;
@@ -1348,6 +1354,10 @@ Expecting `+Et.join(", ")+", got '"+(this.terminals_[w]||w)+"'":Zt="Parse error 
         margin-bottom: var(--margin-s);
       }
 
+      .trip-link {
+        display: block;
+      }
+
       h2 {
         height: fit-content;
         padding: 10px;
@@ -1356,6 +1366,7 @@ Expecting `+Et.join(", ")+", got '"+(this.terminals_[w]||w)+"'":Zt="Parse error 
       h2.title {
         background-color: rgba(245, 245, 245, 0.482);
         width: 100%;
+        text-align: center;
       }
 
       .gear-list {

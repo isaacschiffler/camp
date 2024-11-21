@@ -93,6 +93,10 @@ export class ProfileViewElement extends LitElement {
         margin-bottom: var(--margin-s);
       }
 
+      .trip-link {
+        display: block;
+      }
+
       h2 {
         height: fit-content;
         padding: 10px;
@@ -101,6 +105,7 @@ export class ProfileViewElement extends LitElement {
       h2.title {
         background-color: rgba(245, 245, 245, 0.482);
         width: 100%;
+        text-align: center;
       }
 
       .gear-list {
@@ -158,12 +163,18 @@ export class ProfileViewElement extends LitElement {
 
   renderTripImage(trip: Trip) {
     return html`
-      <header
-        class="trip-img"
-        style="background-image: url(${trip.image_urls[1]})"
+      <a
+        class="trip-link"
+        href="/app/itinerary/${trip._id.toString()}"
+        style="text-decoration: none; color: inherit;"
       >
-        <h2 class="title">${trip.title}</h2>
-      </header>
+        <header
+          class="trip-img"
+          style="background-image: url(${trip.image_urls[1]})"
+        >
+          <h2 class="title">${trip.title}</h2>
+        </header>
+      </a>
     `;
   }
 }
