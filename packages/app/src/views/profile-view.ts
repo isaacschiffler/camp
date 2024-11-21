@@ -1,10 +1,20 @@
 import { Auth, Observer } from "@calpoly/mustang";
 import { css, html, LitElement } from "lit";
+import { state } from "lit/decorators.js";
+import { Trip } from "server/models";
 import resetCSS from "../styles/reset.css";
 import pageCSS from "../styles/page.css";
 
 export class ProfileViewElement extends LitElement {
+  src = "http://localhost:3000/api/itineraries/";
+
+  @state()
+  tripIndex = new Array<Trip>();
+
   render() {
+    const gearList = this.tripIndex.map(this.renderGear);
+    const tripList = this.tripIndex.map(this.renderTripImage);
+
     return html`
       <main class="page">
         <section class="thr-sections">
@@ -20,28 +30,11 @@ export class ProfileViewElement extends LitElement {
           </header>
           <section id="trip" class="trip">
             <h1>My Trips</h1>
-            <header
-              class="trip-img"
-              style="background-image: url('/images/2Y1.jpeg')"
-            >
-              <h2 class="title">Trip to Yellowstone</h2>
-            </header>
+            ${tripList}
           </section>
           <section id="my-gear" class="my-gear">
             <h1>My Gear</h1>
-            <h2>Trip to Yellowstone</h2>
-            <input type="checkbox" id="group1" name="group1" value="group" />
-            <label for="group1">Medical supplies</label><br />
-            <input type="checkbox" id="group2" name="group2" value="group" />
-            <label for="group2">Tent</label><br />
-            <input type="checkbox" id="group3" name="group3" value="group" />
-            <label for="group3">Pots and pans</label><br />
-            <input type="checkbox" id="group4" name="group4" value="group" />
-            <label for="group4">Bug spray</label><br />
-            <input type="checkbox" id="group5" name="group5" value="group" />
-            <label for="group5">Bear spray</label><br />
-            <input type="checkbox" id="group6" name="group6" value="group" />
-            <label for="group6">Bear rope</label><br />
+            ${gearList}
           </section>
           <section id="request" class="request">
             <h1>Pending Invites</h1>
@@ -97,6 +90,7 @@ export class ProfileViewElement extends LitElement {
         max-width: 600px;
         max-height: 450px;
         padding: 0;
+        margin-bottom: var(--margin-s);
       }
 
       h2 {
@@ -107,6 +101,10 @@ export class ProfileViewElement extends LitElement {
       h2.title {
         background-color: rgba(245, 245, 245, 0.482);
         width: 100%;
+      }
+
+      .gear-list {
+        padding-bottom: var(--margin-s);
       }
     `,
   ];
@@ -121,6 +119,51 @@ export class ProfileViewElement extends LitElement {
       if (user) {
         this._user = user;
       }
+      this.hydrate(this.src);
     });
+  }
+
+  hydrate(url: string) {
+    fetch(url, {
+      headers: Auth.headers(this._user),
+    })
+      .then((res: Response) => {
+        if (res.status === 200) return res.json();
+        throw `Server responded with status ${res.status}`;
+      })
+      .then((json: Array<Trip>) => {
+        this.tripIndex = json;
+      })
+      .catch((err) => console.log("Failed to tour data:", err));
+  }
+
+  renderGear(trip: Trip) {
+    return html`
+      <section class="gear-list">
+        <h2>${trip.title}</h2>
+        ${trip.gear?.map(
+          (g: string, index: number) => html`
+            <input
+              type="checkbox"
+              id="gear-${index}-${trip._id.toString()}"
+              name="gear-group-${index}"
+              value="gear-${index}-${trip._id.toString()}"
+            />
+            <label for="gear-${index}-${trip._id.toString()}">${g}</label><br />
+          `
+        ) ?? html`<p>All gear prepared.</p>`}
+      </section>
+    `;
+  }
+
+  renderTripImage(trip: Trip) {
+    return html`
+      <header
+        class="trip-img"
+        style="background-image: url(${trip.image_urls[1]})"
+      >
+        <h2 class="title">${trip.title}</h2>
+      </header>
+    `;
   }
 }
