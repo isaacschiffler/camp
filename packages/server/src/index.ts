@@ -4,6 +4,7 @@ import path from "path";
 import { Trip } from "models";
 import { ItineraryPage } from "./pages/itinerary";
 import { LoginPage } from "./pages/auth";
+import { RegistrationPage } from "./pages/auth";
 
 // import { getTrip } from "./services/itinerary-svc";
 import { connect } from "./services/mongo";
@@ -50,6 +51,11 @@ app.get("/itinerary/:tripId", (req: Request, res: Response) => {
 
 app.get("/login", (req: Request, res: Response) => {
   const page = new LoginPage();
+  res.set("Content-Type", "text/html").send(page.render());
+});
+
+app.get("/register", (req: Request, res: Response) => {
+  const page = new RegistrationPage();
   res.set("Content-Type", "text/html").send(page.render());
 });
 

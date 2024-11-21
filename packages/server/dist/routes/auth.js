@@ -41,12 +41,17 @@ import_dotenv.default.config();
 const TOKEN_SECRET = process.env.TOKEN_SECRET || "NOT_A_SECRET";
 router.post("/register", (req, res) => {
   const { username, password } = req.body;
-  if (!username || !password) {
-    res.status(400).send("Bad request: Invalid input data.");
-  } else {
-    import_credential_svc.default.create(username, password).then((creds) => generateAccessToken(creds.username)).then((token) => {
-      res.status(201).send({ token });
-    });
+  try {
+    if (!username || !password) {
+      res.status(400).send("Bad request: Invalid input data.");
+    } else {
+      import_credential_svc.default.create(username, password).then((creds) => generateAccessToken(creds.username)).then((token) => {
+        res.status(201).send({ token });
+      });
+    }
+  } catch (err) {
+    console.log("Failed to create account", err);
+    res.status(400).send("Failed to create account", err);
   }
 });
 router.post("/login", (req, res) => {
