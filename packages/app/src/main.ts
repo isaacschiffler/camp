@@ -23,6 +23,16 @@ const routes: Switch.Route[] = [
     `,
   },
   {
+    path: "/app/itinerary/edit/:id",
+    view: (params: Switch.Params, query?: URLSearchParams) => html`
+      <itinerary-view
+        tripid=${params.id}
+        mode=${query?.has("edit") ? "edit" : query?.has("new") ? "new" : "view"}
+      >
+      </itinerary-view>
+    `,
+  },
+  {
     path: "/app/step1",
     view: () => html` <step1-view></step1-view>`,
   },

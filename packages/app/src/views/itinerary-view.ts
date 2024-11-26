@@ -85,10 +85,7 @@ export class ItineraryViewElement extends View<Model, Msg> {
   render() {
     if (this.trip) {
       return html`
-        <section
-          mu-form:submit=${(event: Form.SubmitEvent<Trip>) =>
-            this._handleSubmit(event)}
-        >
+        <section>
           <header class="nav">
             <a href="/app">
               <svg class="icon">
@@ -157,7 +154,11 @@ export class ItineraryViewElement extends View<Model, Msg> {
               <img class="outer-img" src="${this.trip.image_urls[2]}" />
             </section>
           </section>
-          <mu-form class="edit" .init=${this._trip}>
+          <mu-form
+            class="edit"
+            @mu-form:submit=${this._handleSubmit}
+            .init=${this._trip}
+          >
             <label>
               <span>Title:</span>
               <input name="title" />
@@ -335,17 +336,39 @@ export class ItineraryViewElement extends View<Model, Msg> {
 
   _handleSubmit(event: Form.SubmitEvent<Trip>) {
     console.log("Handling submit of mu-form");
+    if (!this.trip) {
+      throw new Error("Trip is undefined. Cannot format trip data.");
+    }
     const trip = event.detail;
-    console.log("TRIP ON SUBMIT:", trip);
+    const trip_formatted: Trip = {
+      _id: this.trip._id,
+      title: trip.title,
+      startDate: trip.startDate,
+      endDate: trip.endDate,
+      members: trip.members.map((name: string, index: number) => ({
+        name: name,
+        id: index,
+      })),
+      location: {
+        region: trip.region,
+        campsite: trip.campsites,
+      },
+      activities: trip.activities,
+      gear: trip.gear,
+      image_urls: this.trip.image_urls,
+    };
+    console.log("TRIP ON SUBMIT:", trip_formatted);
     this.dispatchMessage([
       "trip/save",
       {
         tripId: this.tripid ? this.tripid : "",
-        trip,
-        onSuccess: () =>
+        trip: trip_formatted,
+        onSuccess: () => {
           History.dispatch(this, "history/navigate", {
-            href: `/app/trip/${this.tripid}`,
-          }),
+            href: `/app/itinerary/${this.tripid}`,
+          });
+          this.mode = "view";
+        },
         onFailure: (error: Error) => console.log("ERROR:", error),
       },
     ]);

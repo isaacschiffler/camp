@@ -14,7 +14,6 @@ export default function update(
         apply((model) => ({ ...model, trip }))
       );
       break;
-    // put the rest of your cases here
     case "trip/save":
       saveTrip(message[1], user)
         .then((trip) => apply((model) => ({ ...model, trip })))
