@@ -8,28 +8,23 @@ import { HomeViewElement } from "./views/home-view";
 import { LoginViewElement } from "./views/login-view";
 import { Step1View } from "./views/step1-view";
 import { Step2View } from "./views/step2-view";
-import { ItineraryViewElement } from "./views/itinerary-view";
+import {
+  ItineraryViewElement,
+  ItineraryEditElement,
+} from "./views/itinerary-view";
 import { ProfileViewElement } from "./views/profile-view";
 
 const routes: Switch.Route[] = [
   {
     path: "/app/itinerary/:id",
-    view: (params: Switch.Params, query?: URLSearchParams) => html`
-      <itinerary-view
-        tripid=${params.id}
-        mode=${query?.has("edit") ? "edit" : query?.has("new") ? "new" : "view"}
-      >
-      </itinerary-view>
+    view: (params: Switch.Params) => html`
+      <itinerary-view tripid=${params.id}> </itinerary-view>
     `,
   },
   {
     path: "/app/itinerary/edit/:id",
-    view: (params: Switch.Params, query?: URLSearchParams) => html`
-      <itinerary-view
-        tripid=${params.id}
-        mode=${query?.has("edit") ? "edit" : query?.has("new") ? "new" : "view"}
-      >
-      </itinerary-view>
+    view: (params: Switch.Params) => html`
+      <itinerary-edit tripid=${params.id}> </itinerary-edit>
     `,
   },
   {
@@ -61,6 +56,7 @@ class AppElement extends LitElement {
     "step1-view": Step1View,
     "step2-view": Step2View,
     "itinerary-view": ItineraryViewElement,
+    "itinerary-edit": ItineraryEditElement,
     "profile-view": ProfileViewElement,
   });
 
