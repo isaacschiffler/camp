@@ -33,7 +33,7 @@ export default function update(
 }
 
 function selectTrip(msg: { tripId: string }, user: Auth.User) {
-  return fetch(`http://localhost:3000/api/itineraries/${msg.tripId}`, {
+  return fetch(`/api/itineraries/${msg.tripId}`, {
     headers: Auth.headers(user),
   })
     .then((response: Response) => {

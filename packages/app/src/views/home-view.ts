@@ -6,7 +6,7 @@ import resetCSS from "../styles/reset.css";
 import pageCSS from "../styles/page.css";
 
 export class HomeViewElement extends LitElement {
-  src = "http://localhost:3000/api/itineraries/";
+  src = "/api/itineraries/";
 
   @state()
   tripIndex = new Array<Trip>();
