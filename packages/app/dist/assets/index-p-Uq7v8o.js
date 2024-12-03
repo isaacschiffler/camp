@@ -624,7 +624,15 @@ Expecting `+St.join(", ")+", got '"+(this.terminals_[w]||w)+"'":Xt="Parse error 
       }
     `];let ue=zt;var tn=Object.defineProperty,en=(r,t,e,i)=>{for(var s=void 0,n=r.length-1,o;n>=0;n--)(o=r[n])&&(s=o(t,e,s)||s);return s&&tn(t,e,s),s};const Te=class Te extends E{render(){return v`
       <header class="image">
-        <h1 class="title"><slot name="name">Campsite Name</slot></h1>
+        <div class="image-header">
+          <svg class="icon">
+            <use href="/icons/sprite.svg#back" />
+          </svg>
+          <h1 class="title"><slot name="name">Campsite Name</slot></h1>
+          <svg class="icon">
+            <use href="/icons/sprite.svg#next" />
+          </svg>
+        </div>
       </header>
       <section class="cs-info">
         <div class="column">
@@ -667,14 +675,15 @@ Expecting `+St.join(", ")+", got '"+(this.terminals_[w]||w)+"'":Xt="Parse error 
         max-height: 450px;
         padding: 0;
       }
-
-      h1.title {
-        background-color: var(--color-background-image-title);
+      .image-header {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
         width: 100%;
-        height: fit-content;
         padding: 10px;
+        height: fit-content;
+        background-color: var(--color-background-image-title);
       }
-
       .cs-info {
         display: grid;
         grid-template-columns: 1fr 1fr; /* Two equal columns */
@@ -687,6 +696,9 @@ Expecting `+St.join(", ")+", got '"+(this.terminals_[w]||w)+"'":Xt="Parse error 
         margin-top: var(--margin-s);
         font-weight: normal;
         font-size: var(--size-type-ml);
+      }
+      .icon {
+        cursor: pointer;
       }
     `];let Lt=Te;en([Gt({type:String})],Lt.prototype,"image_url");const Ft=class Ft extends E{constructor(){super(...arguments),this._authObserver=new S(this,"backpack:auth"),this._user=new C.User}render(){return v`
       <main class="page">

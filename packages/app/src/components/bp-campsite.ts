@@ -9,7 +9,15 @@ export class CampsiteElement extends LitElement {
   render() {
     return html`
       <header class="image">
-        <h1 class="title"><slot name="name">Campsite Name</slot></h1>
+        <div class="image-header">
+          <svg class="icon">
+            <use href="/icons/sprite.svg#back" />
+          </svg>
+          <h1 class="title"><slot name="name">Campsite Name</slot></h1>
+          <svg class="icon">
+            <use href="/icons/sprite.svg#next" />
+          </svg>
+        </div>
       </header>
       <section class="cs-info">
         <div class="column">
@@ -58,14 +66,15 @@ export class CampsiteElement extends LitElement {
         max-height: 450px;
         padding: 0;
       }
-
-      h1.title {
-        background-color: var(--color-background-image-title);
+      .image-header {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
         width: 100%;
-        height: fit-content;
         padding: 10px;
+        height: fit-content;
+        background-color: var(--color-background-image-title);
       }
-
       .cs-info {
         display: grid;
         grid-template-columns: 1fr 1fr; /* Two equal columns */
@@ -78,6 +87,9 @@ export class CampsiteElement extends LitElement {
         margin-top: var(--margin-s);
         font-weight: normal;
         font-size: var(--size-type-ml);
+      }
+      .icon {
+        cursor: pointer;
       }
     `,
   ];
