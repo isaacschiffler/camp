@@ -1,0 +1,48 @@
+.thr-sections {
+  display: grid;
+  grid-template-columns: [start] repeat(7, 1fr) [end];
+  gap: 10px;
+}
+
+.thr-sections > header {
+  grid-column: start / end;
+}
+
+.trip {
+  grid-column: start / 4;
+}
+
+.my-gear {
+  grid-column: 4 / 6;
+}
+
+.request {
+  grid-column: 6 / 8;
+}
+
+h1 {
+  padding-bottom: var(--margin-m);
+}
+
+.trip-img {
+  background-size: cover;
+  background-position: center;
+  height: 27.5vw;
+  width: 100%;
+  align-items: normal;
+  justify-content: center;
+  width: var(--width-scroll-image);
+  max-width: 600px;
+  max-height: 450px;
+  padding: 0;
+}
+
+h2 {
+  height: fit-content;
+  padding: 10px;
+}
+
+h2.title {
+  background-color: rgba(245, 245, 245, 0.482);
+  width: 100%;
+}

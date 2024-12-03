@@ -14,79 +14,76 @@
       }
     </script>
     <script type="module">
-      import { define } from "@calpoly/mustang";
       import { CampSiteElement } from "./scripts/camp-site.js";
-
+      import { define, Auth } from "@calpoly/mustang";
+      import { HeaderElement } from "/scripts/header.js";
       define({
+        "mu-auth": Auth.Provider,
+        "bp-header": HeaderElement,
         "camp-site": CampSiteElement,
       });
+
+      HeaderElement.initializeOnce();
     </script>
   </head>
-  <body class="thr-sections">
-    <header>
-      <a href="index.html">
-        <h1 class="logo">Backpack</h1>
-      </a>
-      <a href="profile.html">
-        <svg class="page-icons">
-          <use href="/icons/sprite.svg#account" />
-        </svg>
-      </a>
-    </header>
-    <header class="nav">
-      <a href="index.html">
-        <svg class="icon">
-          <use href="/icons/sprite.svg#back" />
-        </svg>
-        <svg class="icon">
-          <use href="/icons/sprite.svg#home" />
-        </svg>
-      </a>
-      <a href="step2.html">
-        <svg class="icon">
-          <use href="/icons/sprite.svg#backpack" />
-        </svg>
-        <svg class="icon">
-          <use href="/icons/sprite.svg#next" />
-        </svg>
-      </a>
-    </header>
-    <section id="location" class="locations">
-      <h1>Locations</h1>
-      <dl>
-        <dt>Yellowstone National Park</dt>
-        <dd>Geysers</dd>
-        <dd>Rivers</dd>
-        <dd>Fishing</dd>
-        <dd>Thermal Areas</dd>
-        <dt>Glacier National Park</dt>
-        <dd>High mountains</dd>
-        <dd>Alpine Lakes</dd>
-        <dd>Glaciers</dd>
-        <dd>Big-horned sheep</dd>
-        <dt>Yosemite National Park</dt>
-        <dd>Half dome</dd>
-        <dd>Waterfalls</dd>
-        <dd>Sequoia Trees</dd>
-      </dl>
-    </section>
-    <section id="campsite" class="campsite">
-      <camp-site image_url="./images/2Y1.jpeg">
-        <span slot="name">Campsite 2Y1: Agate Creek</span>
-        <ul slot="features">
-          <li>Yellowstone River</li>
-          <li>Canyon</li>
-          <li>Evergreen Forest</li>
-          <li>Trout Fishing</li>
-        </ul>
-        <ul slot="amenities">
-          <li>Bear Pole</li>
-          <li>No Bathroom</li>
-          <li>Fire Ring</li>
-          <li>No Fire Grate</li>
-        </ul>
-      </camp-site>
-      <!-- <header class="image" style="background-image: url('/images/2Y1.jpeg')">
+  <body>
+    <mu-auth provides="backpack:auth">
+      <bp-header></bp-header>
+      <section class="thr-sections">
+        <header class="nav">
+          <a href="index.html">
+            <svg class="icon">
+              <use href="/icons/sprite.svg#back" />
+            </svg>
+            <svg class="icon">
+              <use href="/icons/sprite.svg#home" />
+            </svg>
+          </a>
+          <a href="step2.html">
+            <svg class="icon">
+              <use href="/icons/sprite.svg#backpack" />
+            </svg>
+            <svg class="icon">
+              <use href="/icons/sprite.svg#next" />
+            </svg>
+          </a>
+        </header>
+        <section id="location" class="locations">
+          <h1>Locations</h1>
+          <dl>
+            <dt>Yellowstone National Park</dt>
+            <dd>Geysers</dd>
+            <dd>Rivers</dd>
+            <dd>Fishing</dd>
+            <dd>Thermal Areas</dd>
+            <dt>Glacier National Park</dt>
+            <dd>High mountains</dd>
+            <dd>Alpine Lakes</dd>
+            <dd>Glaciers</dd>
+            <dd>Big-horned sheep</dd>
+            <dt>Yosemite National Park</dt>
+            <dd>Half dome</dd>
+            <dd>Waterfalls</dd>
+            <dd>Sequoia Trees</dd>
+          </dl>
+        </section>
+        <section id="campsite" class="campsite">
+          <camp-site image_url="./images/2Y1.jpeg">
+            <span slot="name">Campsite 2Y1: Agate Creek</span>
+            <ul slot="features">
+              <li>Yellowstone River</li>
+              <li>Canyon</li>
+              <li>Evergreen Forest</li>
+              <li>Trout Fishing</li>
+            </ul>
+            <ul slot="amenities">
+              <li>Bear Pole</li>
+              <li>No Bathroom</li>
+              <li>Fire Ring</li>
+              <li>No Fire Grate</li>
+            </ul>
+          </camp-site>
+          <!-- <header class="image" style="background-image: url('/images/2Y1.jpeg')">
         <h1>Campsite 2Y1: Agate Creek</h1>
       </header>
       <section class="cs-info">
@@ -109,89 +106,91 @@
           </ul>
         </div>
       </section> -->
-    </section>
-    <section id="group" class="group">
-      <h1>Group members</h1>
-      <ol class="">
-        <li>
-          <div class="input-cont">
-            <input type="text" value="person1" />
-          </div>
-        </li>
-        <li>
-          <div class="input-cont">
-            <input type="text" value="person2" />
-            <svg class="icon remove">
-              <use href="/icons/sprite.svg#trash" />
-            </svg>
-          </div>
-        </li>
-        <li>
-          <div class="input-cont">
-            <input type="text" value="person3" />
-            <svg class="icon remove">
-              <use href="/icons/sprite.svg#trash" />
-            </svg>
-          </div>
-        </li>
-        <li>
-          <div class="input-cont">
-            <input type="text" value="person4" />
-            <svg class="icon remove">
-              <use href="/icons/sprite.svg#trash" />
-            </svg>
-          </div>
-        </li>
-        <li>
-          <div class="input-cont">
-            <input type="text" value="person5" />
-            <svg class="icon remove">
-              <use href="/icons/sprite.svg#trash" />
-            </svg>
-          </div>
-        </li>
-        <li>
-          <div class="input-cont">
-            <input type="text" value="person6" />
-            <svg class="icon remove">
-              <use href="/icons/sprite.svg#trash" />
-            </svg>
-          </div>
-        </li>
-        <li>
-          <div class="input-cont">
-            <input type="text" value="person7" />
-            <svg class="icon remove">
-              <use href="/icons/sprite.svg#trash" />
-            </svg>
-          </div>
-        </li>
-        <li>
-          <div class="input-cont">
-            <input type="text" value="person8" />
-            <svg class="icon remove">
-              <use href="/icons/sprite.svg#trash" />
-            </svg>
-          </div>
-        </li>
-        <li>
-          <div class="input-cont">
-            <input type="text" value="person9" />
-            <svg class="icon remove">
-              <use href="/icons/sprite.svg#trash" />
-            </svg>
-          </div>
-        </li>
-        <li>
-          <div class="input-cont">
-            <input type="text" value="person10" />
-            <svg class="icon remove">
-              <use href="/icons/sprite.svg#trash" />
-            </svg>
-          </div>
-        </li>
-      </ol>
-      <button>ADD</button>
-    </section>
+        </section>
+        <section id="group" class="group">
+          <h1>Group members</h1>
+          <ol class="">
+            <li>
+              <div class="input-cont">
+                <input type="text" value="person1" />
+              </div>
+            </li>
+            <li>
+              <div class="input-cont">
+                <input type="text" value="person2" />
+                <svg class="icon remove">
+                  <use href="/icons/sprite.svg#trash" />
+                </svg>
+              </div>
+            </li>
+            <li>
+              <div class="input-cont">
+                <input type="text" value="person3" />
+                <svg class="icon remove">
+                  <use href="/icons/sprite.svg#trash" />
+                </svg>
+              </div>
+            </li>
+            <li>
+              <div class="input-cont">
+                <input type="text" value="person4" />
+                <svg class="icon remove">
+                  <use href="/icons/sprite.svg#trash" />
+                </svg>
+              </div>
+            </li>
+            <li>
+              <div class="input-cont">
+                <input type="text" value="person5" />
+                <svg class="icon remove">
+                  <use href="/icons/sprite.svg#trash" />
+                </svg>
+              </div>
+            </li>
+            <li>
+              <div class="input-cont">
+                <input type="text" value="person6" />
+                <svg class="icon remove">
+                  <use href="/icons/sprite.svg#trash" />
+                </svg>
+              </div>
+            </li>
+            <li>
+              <div class="input-cont">
+                <input type="text" value="person7" />
+                <svg class="icon remove">
+                  <use href="/icons/sprite.svg#trash" />
+                </svg>
+              </div>
+            </li>
+            <li>
+              <div class="input-cont">
+                <input type="text" value="person8" />
+                <svg class="icon remove">
+                  <use href="/icons/sprite.svg#trash" />
+                </svg>
+              </div>
+            </li>
+            <li>
+              <div class="input-cont">
+                <input type="text" value="person9" />
+                <svg class="icon remove">
+                  <use href="/icons/sprite.svg#trash" />
+                </svg>
+              </div>
+            </li>
+            <li>
+              <div class="input-cont">
+                <input type="text" value="person10" />
+                <svg class="icon remove">
+                  <use href="/icons/sprite.svg#trash" />
+                </svg>
+              </div>
+            </li>
+          </ol>
+          <button>ADD</button>
+        </section>
+      </section>
+    </mu-auth>
   </body>
 </html>

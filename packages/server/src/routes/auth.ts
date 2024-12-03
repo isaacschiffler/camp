@@ -12,15 +12,20 @@ const TOKEN_SECRET: string = process.env.TOKEN_SECRET || "NOT_A_SECRET";
 router.post("/register", (req: Request, res: Response) => {
   const { username, password } = req.body; // from form
 
-  if (!username || !password) {
-    res.status(400).send("Bad request: Invalid input data.");
-  } else {
-    credentials
-      .create(username, password)
-      .then((creds) => generateAccessToken(creds.username))
-      .then((token) => {
-        res.status(201).send({ token: token });
-      });
+  try {
+    if (!username || !password) {
+      res.status(400).send("Bad request: Invalid input data.");
+    } else {
+      credentials
+        .create(username, password)
+        .then((creds) => generateAccessToken(creds.username))
+        .then((token) => {
+          res.status(201).send({ token: token });
+        });
+    }
+  } catch (err) {
+    console.log("Failed to create account", err);
+    res.status(400).send("Failed to create account", err);
   }
 });
 

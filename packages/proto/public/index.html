@@ -20,17 +20,17 @@
         "bp-header": HeaderElement,
       });
 
-      // HeaderElement.initializeOnce();
+      HeaderElement.initializeOnce();
 
       // dark mode toggle handling
-      const darkModeToggle = document.getElementById("darkmode-toggle");
-      darkModeToggle.addEventListener("change", function () {
-        if (this.checked) {
-          document.body.classList.add("darkmode"); // Add the darkmode class to the body
-        } else {
-          document.body.classList.remove("darkmode"); // Remove the darkmode class
-        }
-      });
+      // const darkModeToggle = document.getElementById("darkmode-toggle");
+      // darkModeToggle.addEventListener("change", function () {
+      //   if (this.checked) {
+      //     document.body.classList.add("darkmode"); // Add the darkmode class to the body
+      //   } else {
+      //     document.body.classList.remove("darkmode"); // Remove the darkmode class
+      //   }
+      // });
 
       const host = "https://ischiffl.csse.dev/";
     </script>
@@ -93,10 +93,6 @@
           </ul>
         </section>
       </section>
-      <label class="color-toggle">
-        <input id="darkmode-toggle" type="checkbox" autocomplete="off" />
-        Dark mode
-      </label>
     </mu-auth>
   </body>
 </html>

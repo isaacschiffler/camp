@@ -28,7 +28,8 @@ var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__ge
 var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
 var auth_exports = {};
 __export(auth_exports, {
-  LoginPage: () => LoginPage
+  LoginPage: () => LoginPage,
+  RegistrationPage: () => RegistrationPage
 });
 module.exports = __toCommonJS(auth_exports);
 var import_server = require("@calpoly/mustang/server");
@@ -40,10 +41,12 @@ class LoginPage {
         `
         import { define, Auth } from "@calpoly/mustang";
         import { LoginForm } from "/scripts/login-form.js";
+        import { HeaderElement } from "/scripts/header.js";
 
         define({
           "mu-auth": Auth.Provider,
-          "login-form": LoginForm
+          "login-form": LoginForm,
+          "bp-header": HeaderElement,
         })
         `
       ],
@@ -68,16 +71,7 @@ class LoginPage {
       body: import_server.html`
         <body>
           <mu-auth provides="blazing:auth">
-            <header>
-              <a href="index.html">
-                <h1 class="logo">Backpack</h1>
-              </a>
-              <a href="profile.html">
-                <svg class="page-icons">
-                  <use href="/icons/sprite.svg#account" />
-                </svg>
-              </a>
-            </header>
+            <bp-header></bp-header>
             <article>
               <main class="page">
                 <login-form api="/auth/login">
@@ -94,7 +88,58 @@ class LoginPage {
     });
   }
 }
+class RegistrationPage {
+  render() {
+    return (0, import_renderPage.default)({
+      styles: [
+        import_server.css`
+          article {
+            display: flex;
+            height: 70vh;
+            align-items: center;
+            justify-content: center;
+          }
+          h2 {
+            margin-bottom: var(--margin-m);
+          }
+          p {
+            display: flex;
+            justify-content: center;
+            margin-top: var(--margin-m);
+          }
+        `
+      ],
+      scripts: [
+        `
+        import { define, Auth } from "@calpoly/mustang";
+        import { RegisterForm } from "/scripts/register-form.js";
+
+        define({
+          "mu-auth": Auth.Provider,
+          "registration-form": RegisterForm
+        })
+        `
+      ],
+      body: import_server.html`<body>
+        <mu-auth provides="blazing:auth">
+          <article>
+            <blz-header> </blz-header>
+            <main class="page">
+              <registration-form api="/auth/register">
+                <h2 slot="title">Sign up to plan your next trip!</h2>
+              </registration-form>
+              <p class="login">
+                <a href="./login">Or login with an existing account!</a>
+              </p>
+            </main>
+          </article>
+        </mu-auth>
+      </body> `
+    });
+  }
+}
 // Annotate the CommonJS export names for ESM import in node:
 0 && (module.exports = {
-  LoginPage
+  LoginPage,
+  RegistrationPage
 });
